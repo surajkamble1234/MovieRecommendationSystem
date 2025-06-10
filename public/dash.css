@@ -1,0 +1,12 @@
+button {
+    margin-right: 10px; /* Adjust spacing */
+}
+#navbarSupportedContent a{
+    text-decoration: none;
+    color: black;
+}
+#navbarSupportedContent a:hover{
+   
+    color: white;
+   
+}
