@@ -9,8 +9,8 @@ exports.userlogin=((req,res)=>{
 });
 
 exports.userregister=((req,res)=>{
-   let {username,password,confirmpassword,email,contact,city}=req.body;
-   let result=adminmodel.addregisterdata(username,password,confirmpassword,email,contact,city);
+   let {username,password,confirmpassword,email,contact,city,role}=req.body;
+   let result=adminmodel.addregisterdata(username,password,confirmpassword,email,contact,city.role);
    result.then((r)=>{
     res.render("userlogin.ejs",{msg:"data store successfully...."});
    }).catch((err)=>{
@@ -43,7 +43,7 @@ exports.adminlogin=((req,res)=>{
    res.render("adminlogin.ejs");
 });
 
-exports.adminsignup=((req,res)=>{
+exports.adminvalid=((req,res)=>{
    res.render("adminsignup.ejs");
 });
 
