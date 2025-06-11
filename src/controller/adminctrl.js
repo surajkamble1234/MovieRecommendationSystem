@@ -43,7 +43,4 @@ exports.adminlogin=((req,res)=>{
    res.render("adminlogin.ejs");
 });
 
-exports.adminsignup=((req,res)=>{
-   res.render("adminsignup.ejs");
-});
 
