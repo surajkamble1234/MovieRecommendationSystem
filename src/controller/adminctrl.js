@@ -1,7 +1,7 @@
 let adminmodel=require("../models/userreg.js");
 
 exports.adminctrl=((req,res)=>{
-  res.render("dashboard.ejs");
+  res.render("home.ejs");
 });
 //user login
 exports.userlogin=((req,res)=>{
