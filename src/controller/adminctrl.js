@@ -1,4 +1,5 @@
 let adminmodel=require("../models/userreg.js");
+let dotenv=require("dotenv").config();
 
 exports.adminctrl=((req,res)=>{
   res.render("home.ejs");
@@ -9,12 +10,12 @@ exports.userlogin=((req,res)=>{
 });
 
 exports.userregister=((req,res)=>{
-   let {username,password,confirmpassword,email,contact,city}=req.body;
-   let result=adminmodel.addregisterdata(username,password,confirmpassword,email,contact,city);
+   let {username,password,confirmpassword,email,contact,city,role}=req.body;
+   let result=adminmodel.addregisterdata(username,password,confirmpassword,email,contact,city,role);
    result.then((r)=>{
     res.render("userlogin.ejs",{msg:"data store successfully...."});
    }).catch((err)=>{
-    res.render("userlogin.ejs",{msg:"data not store successfully..."});
+    res.render("usersignup.ejs",{msg:"data not store successfully..."});
    });
 });
 
@@ -23,24 +24,49 @@ exports.validuserdata=((req,res)=>{
   let promobj=adminmodel.validuserdata(username,password);
   promobj.then((ress)=>{
    if(ress.length>0){
-      req.session.uid = ress[0].rid;
-      res.render("userprofile.ejs");
+      let role=ress[0].role;
+      req.session.uid = ress[0].uid;
+      if(role==='user')
+      {
+      res.render("userdashboard.ejs");
+      }else{
+         res.render("userlogin.ejs",{msg:" invalid username and password "});
+      }
    }else{
-      res.render("userlogin.ejs",{msg:" invalid username and password "})
+      res.render("userlogin.ejs",{msg:" invalid username and password "});
    }
   }).catch((err)=>{
       res.render("error.ejs");
-     console.log(err)
   }); 
 });
 
 exports.usersignup=((req,res)=>{
-   res.render("usersignup.ejs");
+   res.render("usersignup.ejs",{msg:""});
 });
 
 //admin login
 exports.adminlogin=((req,res)=>{
-   res.render("adminlogin.ejs");
+   res.render("adminlogin.ejs",{msg:""});
 });
 
+exports.validadminn=((req,res)=>{
+  let {username,password,superadmin}=req.body;
+  let validadmin=adminmodel.validadmindata(username,password,superadmin);
+      validadmin.then((validad)=>{
+       if(validad.length>0)
+       { 
+         if(superadmin===process.env.adminkey)
+         {
+            res.render("admindashboard.ejs");
+         }else{
+          res.render("adminlogin.ejs",{msg:"invalid username and password"});
+         }
+       }else{
+           res.render("adminlogin.ejs",{msg:"invalid username and password"});
+       }
+      }).catch((err)=>{
+          res.render("error.ejs");
+
+      });
+});
 
