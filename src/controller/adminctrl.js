@@ -27,12 +27,13 @@ exports.validuserdata=((req,res)=>{
   let {username,password}=req.body;
   let promobj=adminmodel.validuserdata(username,password);
   promobj.then((ress)=>{
+   //  req.session.userid = ress[0].uid;
    if(ress.length>0){
-      req.session.uid = ress[0].uid;
       let role=ress[0].role;
       if(role==='user')
       {
-       res.render("userdashboard.ejs");
+         let name=ress[0].username;
+       res.render("userdashboard.ejs",{usersession:name});
       }else{
          res.render("userlogin.ejs",{msg:" invalid username and password "})
       }
@@ -46,10 +47,6 @@ exports.validuserdata=((req,res)=>{
   }); 
 });
 
-//user dashboard
-exports.usersearch=((req,res)=>{
-   res.render("usersearch.ejs");
-});
 
 
 //admin login
