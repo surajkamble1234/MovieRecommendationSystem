@@ -14,9 +14,4 @@ router.post("/validuser",adminctrl.validuserdata);
 //admin login
 router.get("/adminlogin",adminctrl.adminlogin);
 
-<<<<<<< HEAD
-
-=======
-router.post("/validadminn",adminctrl.validadmin);
->>>>>>> 2c99c621a32da3d9ce2f6f89d440e0a36284c32e
 module.exports=router;
