@@ -27,3 +27,16 @@ exports.validuserdata=((...uservalidate)=>{
      });
   });
 });
+
+exports.validadmindata=((...validadmin)=>{
+  return new Promise((resolve,reject)=>{
+    conn.query("select * from userregister where username=? and password=?",[...validadmin],(err,result)=>{
+       if(err)
+       {
+        reject(err);
+       }else{
+        resolve(result);
+       }
+    });
+  });
+});

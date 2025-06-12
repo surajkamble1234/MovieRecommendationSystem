@@ -1,4 +1,5 @@
-let adminmodel=require("../models/userreg.js");
+let adminmodel=require("../models/adminmodel.js");
+let dotenv=require("dotenv").config();
 
 exports.adminctrl=((req,res)=>{
   res.render("home.ejs");
@@ -48,7 +49,28 @@ exports.validuserdata=((req,res)=>{
 
 //admin login
 exports.adminlogin=((req,res)=>{
-   res.render("adminlogin.ejs");
+   res.render("adminlogin.ejs",{msg:""});
+});
+
+exports.validadmin=((req,res)=>{
+    let{username,password,superadmin}=req.body;
+    let validadminn=adminmodel.validadmindata(username,password);
+    validadminn.then((validad)=>{
+      if(validad.length>0)
+      {
+         if(superadmin===process.env.adminkey)
+         {
+            res.render("admindashboard.ejs");
+         }else{
+            res.render("adminlogin.ejs",{msg:"invalid username and password"});
+         }
+      }else{
+         res.render("adminlogin.ejs",{msg:"invalid username and password"});
+      }
+    }).catch((err)=>{
+         res.render("error.ejs");
+         console.log(err)
+    });
 });
 
 
