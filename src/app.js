@@ -4,9 +4,12 @@ let cookieParser=require("cookie-parser");
 let router=require("../src/routes/route.js");
 let conn=require("../db.js");
 let session=require("express-session");
+let path=require("path");
 let app=express();
     app.use(express.static("public"));
     app.set("view engines","ejs");
+    app.set("views", path.join(__dirname, "..", "views"));
+
     app.use(bodyParser.json());
     app.use(express.urlencoded({extended:true}));
     app.use(session({

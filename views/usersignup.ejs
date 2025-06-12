@@ -67,7 +67,7 @@
   <div class="login-container">
     
     <h2>User Signup</h2>
-    <form>
+    <form name="frm" action="/useradd" method="post">
       <div class="form-group  mb-4">
           <label for="username">Username</label>
           <input type="text" name="username" value="" class="form-control mx-auto w-80" id="username" placeholder="Enter Username">
@@ -97,7 +97,13 @@
           <label for="city">City</label>
           <input type="text" name="city" value="" class="form-control mx-auto w-80" id="city" placeholder="City">
         </div>
-
+         
+        <div class="form-group mb-4">
+          <select name="role" id="">
+            <option value="user">user</option>
+            <option value="admin">admin</option>
+          </select>
+        </div>
         <div class="form-group text-center mb-4">
           <label class="form-check-label">Have an account? <a href="/user">Login</a></label>
         </div>
@@ -105,7 +111,10 @@
         <div class="text-center">
           <button type="submit" class="btn btn-primary w-50">Sign Up</button>
         </div>
-
+   
+        <div class="form-group form-check">
+        <label class="form-check-label"><%=msg%></label>
+      </div>
     </form>
   </div>
 
