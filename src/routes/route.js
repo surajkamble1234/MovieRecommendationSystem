@@ -12,4 +12,5 @@ router.post("/validuser",adminctrl.validuserdata);
 router.get("/adminlogin",adminctrl.adminlogin);
 router.get("/adminsignup",adminctrl.adminsignup);
 
+
 module.exports=router;
