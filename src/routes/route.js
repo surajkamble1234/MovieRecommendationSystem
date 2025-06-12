@@ -8,6 +8,9 @@ router.get("/usersignup",adminctrl.usersignup);
 
 router.post("/useradd",adminctrl.userregister);
 router.post("/validuser",adminctrl.validuserdata);
+
+//user dashboard
+router.get("/search",adminctrl.usersearch);
 //admin login
 router.get("/adminlogin",adminctrl.adminlogin);
 

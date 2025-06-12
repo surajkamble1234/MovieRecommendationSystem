@@ -19,6 +19,7 @@ exports.userregister=((req,res)=>{
     res.render("userlogin.ejs",{msg:"data store successfully...."});
    }).catch((err)=>{
     res.render("usersignup.ejs",{msg:"data not store successfully..."});
+
    });
 });
 
@@ -45,6 +46,10 @@ exports.validuserdata=((req,res)=>{
   }); 
 });
 
+//user dashboard
+exports.usersearch=((req,res)=>{
+   res.render("usersearch.ejs");
+});
 
 
 //admin login
@@ -69,9 +74,9 @@ exports.validadmin=((req,res)=>{
       }
     }).catch((err)=>{
          res.render("error.ejs");
-         console.log(err)
     });
 });
+
 
 
 
