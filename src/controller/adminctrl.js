@@ -47,11 +47,6 @@ exports.validuserdata=((req,res)=>{
   }); 
 });
 
-// exports.viewuserprofile=((req,res)=>{
-//   let loginuser=req.session.userid;
-//   res.render("userdashboard.ejs",{view:loginuser});
-//   console.log(loginuser)
-// });
 
 
 //admin login
@@ -60,12 +55,12 @@ exports.adminlogin=((req,res)=>{
 });
 
 exports.validadmin=((req,res)=>{
-    let{username,password,superadmin}=req.body;
+    let{username,password,adminkey}=req.body;
     let validadminn=adminmodel.validadmindata(username,password);
     validadminn.then((validad)=>{
       if(validad.length>0)
       {
-         if(superadmin===process.env.adminkey)
+         if(adminkey===process.env.adminkey)
          {
             res.render("admindashboard.ejs");
          }else{

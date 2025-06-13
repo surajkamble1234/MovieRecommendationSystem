@@ -52,37 +52,35 @@
     <h2 class="text-center mb-4">👤 User Profile Details</h2>
     
     <div class="row justify-content-center">
-      <div class="col-lg-10">
-        <div class="table-responsive">
-          <table class="table table-bordered table-striped table-hover">
-            <thead class="table-dark text-center">
-              <tr>
-                <th>Username</th>
-                <th>Password</th>
-                <th>Confirm Password</th>
-                <th>Email</th>
-                <th>Contact</th>
-                <th>City</th>
-                <th>Role</th>
-                <th>Update</th>
-                <th>Delete</th>
-              </tr>
-            </thead>
-            <tbody class="text-center">
-              <tr>
-                <td><%=viewprof[0].username%></td>
-                <td><%=viewprof[0].password%></td>
-                <td><%=viewprof[0].confirmpassword%></td>
-                <td><%=viewprof[0].email%></td>
-                <td><%=viewprof[0].contact%></td>
-                <td><%=viewprof[0].city%></td>
-                <td><%=viewprof[0].role%></td>
-                <td><a href="#" class="btn btn-sm btn-warning">Update</a></td>
-                <td><a href="#" class="btn btn-sm btn-danger">Delete</a></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+      <div class="col-12 col-md-11 col-lg-10">
+        <table class="table table-bordered table-striped table-hover table-sm text-center">
+          <thead class="table-dark">
+            <tr>
+              <th>Username</th>
+              <th>Password</th>
+              <th>Confirm<br>Password</th>
+              <th>Email</th>
+              <th>Contact</th>
+              <th>City</th>
+              <th>Role</th>
+              <th>Update</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%=viewprof[0].username%></td>
+              <td><%=viewprof[0].password%></td>
+              <td><%=viewprof[0].confirmpassword%></td>
+              <td><%=viewprof[0].email%></td>
+              <td><%=viewprof[0].contact%></td>
+              <td><%=viewprof[0].city%></td>
+              <td><%=viewprof[0].role%></td>
+              <td><a href="#" class="btn btn-sm btn-warning px-3">Update</a></td>
+              <td><a href="#" class="btn btn-sm btn-danger px-3">Delete</a></td>
+            </tr>
+          </tbody>
+        </table>
 
         <div class="text-center mt-4">
           <button class="btn btn-primary" onclick="editProfile()">Edit Profile</button>
@@ -91,6 +89,7 @@
     </div>
   </div>
 `
+
 ,
         subscribe: `<h2>🔔 Subscribe</h2><p>Manage your subscriptions here.</p>`,
         rate: `<h2>⭐ Rate Movies</h2><p>Rate your favorite movies.</p>`,
