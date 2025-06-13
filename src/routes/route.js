@@ -10,8 +10,9 @@ router.post("/useradd",adminctrl.userregister);
 router.post("/validuser",adminctrl.validuserdata);
 
 //user dashboard
-
+router.post("/viewprofile",adminctrl.viewuserprofile);
 //admin login
 router.get("/adminlogin",adminctrl.adminlogin);
+router.get("/validadminlogin",adminctrl.validadmin);
 
 module.exports=router;
