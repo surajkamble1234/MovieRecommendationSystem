@@ -168,7 +168,54 @@
         <div id="reviewSection" class="content-section"><p class="text-white">Review Accounts Section</p></div>
         <div id="recommendationSection" class="content-section"><p class="text-white">Recommendations Section</p></div>
         <div id="categorySection" class="content-section"><p class="text-white">Create Categories Section</p></div>
-        <div id="usersSection" class="content-section"><p class="text-white">Users Section</p></div>
+        <div id="usersSection" class="content-section">
+          <p class="text-white">Users Section</p>
+          <div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-11 col-lg-10">
+      <table class="table table-bordered table-striped table-hover table-sm text-center">
+        <thead class="table-dark">
+          <tr>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Confirm<br>Password</th>
+            <th>Email</th>
+            <th>Contact</th>
+            <th>City</th>
+            <th>Role</th>
+            <th>Update</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+         
+
+            <%
+               viewuserdata.forEach((item)=>{
+            %>
+                 <tr>
+            <td><%=item.username%></td>
+            <td><%=item.password%></td>
+            <td><%=item.confirmpassword%></td>
+            <td><%=item.email%></td>
+            <td><%=item.contact%></td>
+            <td><%=item.city%></td>
+            <td><%=item.role%></td>
+            <td><a href="#" class="btn btn-sm btn-warning px-3">Update</a></td>
+            <td><a href="#" class="btn btn-sm btn-danger px-3">Delete</a></td>
+          </tr>
+            <%
+               })
+            %>
+            
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
+
+        </div>
         <div id="reviewsSection" class="content-section"><p class="text-white">Reviews Section</p></div>
         <div id="settingsSection" class="content-section"><p class="text-white">Settings Section</p></div>
       </main>

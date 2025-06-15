@@ -27,7 +27,6 @@ exports.validuserdata=((req,res)=>{
   let {username,password}=req.body;
   let promobj=adminmodel.validuserdata(username,password);
   promobj.then((ress)=>{
-   req.session.userid = ress[0].uid;
    if(ress.length>0){
       let role=ress[0].role;
       if(role==='user')
@@ -43,11 +42,40 @@ exports.validuserdata=((req,res)=>{
    }
   }).catch((err)=>{
       res.render("error.ejs");
-     console.log(err)
   }); 
 });
 
+exports.deleteuser=((req,res)=>{
+  let userid=req.query.userid;
+  let deluser=adminmodel.userdelete(userid);
+      deluser.then((deluse)=>{
+         res.render("home.ejs");
+      }).catch((err)=>{
+           res.render("home.ejs");
+        
+      });
+});
 
+exports.updateuser=((req,res)=>{
+  let userid=req.query.userid;
+   let userupda=adminmodel.updateuser(userid);
+   userupda.then((userupdatedata)=>{
+   res.render("updateuser.ejs",{userupda:userupdatedata});
+   }).catch((err)=>{
+   res.render("updateuser.ejs",{userupda:userupdatedata});
+  
+   });
+});
+
+exports.finalupdateuser=((req,res)=>{
+let {username,password,confirmpassword,contact,city,uid}=req.body;
+let finalup=adminmodel.finalupdateuser(username,password,confirmpassword,contact,city,uid);
+    finalup.then((userup)=>{
+        res.render("userlogin.ejs",{msg:"data update successfully...."});
+    }).catch((err)=>{
+     res.render("userlogin.ejs",{msg:"data not update successfully...."});
+    });
+});
 
 //admin login
 exports.adminlogin=((req,res)=>{
@@ -62,7 +90,7 @@ exports.validadmin=((req,res)=>{
       {
          if(adminkey===process.env.adminkey)
          {
-            res.render("admindashboard.ejs");
+            res.render("admindashboard.ejs",{viewuserdata:[]});
          }else{
             res.render("adminlogin.ejs",{msg:"invalid username and password"});
          }
@@ -74,6 +102,15 @@ exports.validadmin=((req,res)=>{
     });
 });
 
+exports.viewuseradmin = ((req, res) => {
+  adminmodel.viewalluser()
+    .then((data) => {
+      res.render("admindashboard.ejs", { viewuserdata: data });
+    })
+    .catch((err) => {
+      res.render("error.ejs");
+    });
+});
 
 
 

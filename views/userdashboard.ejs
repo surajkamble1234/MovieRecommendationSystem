@@ -15,7 +15,7 @@
     <div class="sidebar">
       <div class="profile-header">
         <img src="https://static.vecteezy.com/system/resources/previews/022/419/985/non_2x/human-simple-line-icon-on-white-background-free-vector.jpg">
-        <div class="name"><%=viewprof[0].username%></div>
+        <div class="name">Welcome : <%=viewprof[0].username%></div>
       </div>
 
       <a href="/" class="nav-link active" onclick="loadContent('home')"><i class="fas fa-home me-2"></i>Home</a>
@@ -25,7 +25,7 @@
       <a href="#" class="nav-link" onclick="loadContent('subscribe')"><i class="fas fa-bell me-2"></i>Subscribe</a>
       <a href="#" class="nav-link" onclick="loadContent('rate')"><i class="fas fa-star me-2"></i>Rate</a>
       <a href="#" class="nav-link" onclick="loadContent('comment')"><i class="fas fa-comment me-2"></i>Comment</a>
-      <a href="#" class="nav-link" onclick="loadContent('logout')"><i class="fas fa-sign-in-alt me-2"></i>Logout</a>
+      <a href="/delbyuser?userid=<%=viewprof[0].uid%>" class="nav-link" onclick="loadContent('logout')"><i class="fas fa-sign-in-alt me-2"></i>Logout</a>
     </div>
 
     <!-- Main Content -->
@@ -48,53 +48,68 @@
         search: `<h2>🔍 Search Movies</h2><p>You can search movies here.</p>`,
         movies:  `cd`,
         details: `
-  <div class="container mt-5">
-    <h2 class="text-center mb-4">👤 User Profile Details</h2>
-    
-    <div class="row justify-content-center">
-      <div class="col-12 col-md-11 col-lg-10">
-        <table class="table table-bordered table-striped table-hover table-sm text-center">
-          <thead class="table-dark">
-            <tr>
-              <th>Username</th>
-              <th>Password</th>
-              <th>Confirm<br>Password</th>
-              <th>Email</th>
-              <th>Contact</th>
-              <th>City</th>
-              <th>Role</th>
-              <th>Update</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><%=viewprof[0].username%></td>
-              <td><%=viewprof[0].password%></td>
-              <td><%=viewprof[0].confirmpassword%></td>
-              <td><%=viewprof[0].email%></td>
-              <td><%=viewprof[0].contact%></td>
-              <td><%=viewprof[0].city%></td>
-              <td><%=viewprof[0].role%></td>
-              <td><a href="#" class="btn btn-sm btn-warning px-3">Update</a></td>
-              <td><a href="#" class="btn btn-sm btn-danger px-3">Delete</a></td>
-            </tr>
-          </tbody>
-        </table>
+                  <div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
 
-        <div class="text-center mt-4">
-          <button class="btn btn-primary" onclick="editProfile()">Edit Profile</button>
+      <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-header bg-primary text-white text-center rounded-top-4">
+          <h3 class="mb-0">👤 User Profile</h3>
+        </div>
+
+        <div class="card-body bg-light">
+          <form>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Username</label>
+              <input type="text" class="form-control" value="<%= viewprof[0].username %>" readonly>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Password</label>
+              <input type="text" class="form-control" value="<%= viewprof[0].password %>">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Confirm Password</label>
+              <input type="text" class="form-control" value="<%= viewprof[0].confirmpassword %>">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Email</label>
+              <input type="email" class="form-control" value="<%= viewprof[0].email %>" readonly>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Contact</label>
+              <input type="text" class="form-control" value="<%= viewprof[0].contact %>" readonly>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold">City</label>
+              <input type="text" class="form-control" value="<%= viewprof[0].city %>" readonly>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Role</label>
+              <input type="text" class="form-control" value="<%= viewprof[0].role %>" readonly>
+            </div>
+          </form>
+        </div>
+
+        <div class="card-footer text-center bg-white border-0">
+          <button class="btn btn-outline-primary px-4" onclick="editProfile()"><a href="/updateuser?userid=<%= viewprof[0].uid%>">✏️ Edit Profile</a></button>
         </div>
       </div>
+
     </div>
   </div>
-`
+</div>
 
-,
+                `,
         subscribe: `<h2>🔔 Subscribe</h2><p>Manage your subscriptions here.</p>`,
         rate: `<h2>⭐ Rate Movies</h2><p>Rate your favorite movies.</p>`,
         comment: `<h2>💬 Comment</h2><p>Leave your comments and feedback here.</p>`,
-        logout: `<h2>🚪 Logout</h2><p>You have been logged out.</p>`
+        // logout: ``
       };
 
       // Update content area
