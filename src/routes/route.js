@@ -16,4 +16,10 @@ router.post("/finaluserupdate",adminctrl.finalupdateuser);
 router.get("/adminlogin",adminctrl.adminlogin);
 router.post("/validadminn",adminctrl.validadmin);
 router.get("/useradminview",adminctrl.viewuseradmin);
+
+//search movie
+//Movie Recommendations Route
+router.get("/smart", adminctrl.smartsearch);
+router.get("/search", adminctrl.searchMovies);
+
 module.exports=router;
