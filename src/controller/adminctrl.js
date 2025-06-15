@@ -13,6 +13,7 @@ exports.usersignup=((req,res)=>{
 });
 
 exports.userregister=((req,res)=>{
+   
    let {username,password,confirmpassword,email,contact,city,role}=req.body;
    let result=adminmodel.addregisterdata(username,password,confirmpassword,email,contact,city,role);
    result.then((r)=>{
