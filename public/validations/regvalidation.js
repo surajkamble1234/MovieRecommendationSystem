@@ -49,13 +49,21 @@ function validpass() {
 }
 
 function validConfirmPassword() {
-  let pass = document.getElementById("password").value;
-  let cpass = document.getElementById("confirmPassword").value;
   let input = document.getElementById("confirmPassword");
   let msg = document.getElementById("confirmPasswordMsg");
+  let pass = document.getElementById("password").value;
+  let cpass = input.value;
+  let isValid = true;
 
-  let isValid = pass === cpass && cpass.length > 0;
-  msg.textContent = isValid ? "" : "Passwords do not match.";
+  if (cpass.length === 0) {
+    msg.textContent = "Please confirm your password.";
+    isValid = false;
+  } else if (pass !== cpass) {
+    msg.textContent = "Passwords do not match.";
+    isValid = false;
+  }
+
+  if (isValid) msg.textContent = "";
   setInputStyle(input, isValid);
   return isValid;
 }
@@ -64,9 +72,16 @@ function validEmail() {
   let input = document.getElementById("email");
   let msg = document.getElementById("emailMsg");
   let str = input.value.trim();
+  let isValid = true;
 
-  let isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(str);
-  msg.textContent = isValid ? "" : "Enter a valid email address.";
+  let pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!pattern.test(str)) {
+    msg.textContent = "Enter a valid email address.";
+    isValid = false;
+  } else {
+    msg.textContent = "";
+  }
+
   setInputStyle(input, isValid);
   return isValid;
 }
@@ -74,13 +89,18 @@ function validEmail() {
 function validContact() {
   let input = document.getElementById("contact");
   let msg = document.getElementById("contactMsg");
-  let str = input.value;
-  let isValid = str.length === 10;
+  let str = input.value.trim();
+  let isValid = true;
 
-  for (let i = 0; i < str.length; i++) {
-    if (!(str.charCodeAt(i) >= 48 && str.charCodeAt(i) <= 57)) {
-      isValid = false;
-      break;
+  if (str.length !== 10) {
+    isValid = false;
+  } else {
+    for (let i = 0; i < str.length; i++) {
+      let ch = str.charCodeAt(i);
+      if (ch < 48 || ch > 57) {
+        isValid = false;
+        break;
+      }
     }
   }
 
@@ -93,13 +113,17 @@ function validCity() {
   let input = document.getElementById("city");
   let msg = document.getElementById("cityMsg");
   let str = input.value.trim();
-  let isValid = str.length > 0;
+  let isValid = true;
 
-  for (let i = 0; i < str.length; i++) {
-    let ch = str.charCodeAt(i);
-    if (!((ch >= 65 && ch <= 90) || (ch >= 97 && ch <= 122) || ch === 32)) {
-      isValid = false;
-      break;
+  if (str.length === 0) {
+    isValid = false;
+  } else {
+    for (let i = 0; i < str.length; i++) {
+      let ch = str.charCodeAt(i);
+      if (!((ch >= 65 && ch <= 90) || (ch >= 97 && ch <= 122) || ch === 32)) {
+        isValid = false;
+        break;
+      }
     }
   }
 
@@ -117,14 +141,14 @@ function setInputStyle(input, isValid) {
     input.classList.remove("valid");
   }
 }
-
 document.forms["frm"].onsubmit = function () {
-  return (
+  let isFormValid =
     validuse() &&
     validpass() &&
     validConfirmPassword() &&
     validEmail() &&
     validContact() &&
-    validCity()
-  );
+    validCity();
+
+
 };

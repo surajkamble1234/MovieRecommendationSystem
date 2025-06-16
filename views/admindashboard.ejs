@@ -33,6 +33,19 @@
     .content-section.active {
       display: block;
     }
+    .table td, .table th {
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+    body {
+     overflow-x: hidden; /* Disables horizontal scroll */
+    }
+
+    .table td, .table th {
+     word-break: break-word;
+     white-space: normal;
+     }
+
   </style>
 </head>
 <body>
@@ -67,7 +80,6 @@
 
       <!-- Main Content -->
       <main class="col-md-10 ms-sm-auto col-lg-10 px-md-4 pt-4">
-        <!-- Top Bar -->
         <div class="d-flex justify-content-between align-items-center pb-3">
           <h2>Welcome, Admin</h2>
           <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" width="40" height="40" class="rounded-circle" alt="Admin" />
@@ -78,9 +90,8 @@
           <div class="row text-white">
             <div class="col-sm-6 col-md-3 mb-3">
               <div class="card bg-primary text-center p-3">
-                <div class="card-icon mb-2"><i class="bi bi-people-fill"></i></div>
-                <h5>0</h5>
-                <p>Total Users</p>
+                <div class="card-icon mb-2"><i class="bi bi-people-fill"></i> </div>
+                 <a href="/moviee">addmovie</a>
               </div>
             </div>
             <div class="col-sm-6 col-md-3 mb-3">
@@ -164,77 +175,78 @@
           </div>
         </div>
 
-        <!-- Other sections (blank for now) -->
+        <!-- Other Sections -->
         <div id="reviewSection" class="content-section"><p class="text-white">Review Accounts Section</p></div>
         <div id="recommendationSection" class="content-section"><p class="text-white">Recommendations Section</p></div>
         <div id="categorySection" class="content-section"><p class="text-white">Create Categories Section</p></div>
-        <div id="usersSection" class="content-section">
-          <p class="text-white">Users Section</p>
-          <div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-12 col-md-11 col-lg-10">
-      <table class="table table-bordered table-striped table-hover table-sm text-center">
-        <thead class="table-dark">
-          <tr>
-            <th>Username</th>
-            <th>Password</th>
-            <th>Confirm<br>Password</th>
-            <th>Email</th>
-            <th>Contact</th>
-            <th>City</th>
-            <th>Role</th>
-            <th>Update</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-         
-
-            <%
-               viewuserdata.forEach((item)=>{
-            %>
-                 <tr>
-            <td><%=item.username%></td>
-            <td><%=item.password%></td>
-            <td><%=item.confirmpassword%></td>
-            <td><%=item.email%></td>
-            <td><%=item.contact%></td>
-            <td><%=item.city%></td>
-            <td><%=item.role%></td>
-            <td><a href="#" class="btn btn-sm btn-warning px-3">Update</a></td>
-            <td><a href="#" class="btn btn-sm btn-danger px-3">Delete</a></td>
-          </tr>
-            <%
-               })
-            %>
-            
-        </tbody>
-      </table>
-
+         <div id="usersSection" class="content-section">
+  <p class="text-white">Users Section</p>
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <table class="table table-bordered table-striped table-hover table-sm text-center align-middle w-100">
+          <% if(viewuserdata && viewuserdata.length > 0){ %>
+            <thead class="table-dark">
+             
+              <tr>
+                <th>Username</th>
+                <th>Password</th>
+                <th>ConfirmPassword</th>
+                <th>Email</th>
+                <th>Contact</th>
+                <th>City</th>
+                <th>Role</th>
+                <th>Update</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% viewuserdata.forEach(function(user){ %>
+                <tr>
+                  <td><%= user.username %></td>
+                  <td><%= user.password %></td>
+                  <td><%= user.confirmpassword %></td>
+                  <td><%= user.email %></td>
+                  <td><%= user.contact %></td>
+                  <td><%= user.city %></td>
+                  <td><%= user.role %></td>
+                  <td>
+                    <a href="/updateadmin?userid=<%= user.uid %>" class="btn btn-sm btn-warning">Update</a>
+                  </td>
+                  <td>
+                    <a href="/delbyadmin?userid=<%= user.uid %>" class="btn btn-sm btn-danger">Delete</a>
+                  </td>
+                </tr>
+              <% }); %>
+            </tbody>
+          <% } else { %>
+            <tbody>
+              <tr>
+                <td colspan="9" class="text-center">No user data available.</td>
+              </tr>
+            </tbody>
+          <% } %>
+        </table>
+      </div>
     </div>
   </div>
 </div>
 
-        </div>
         <div id="reviewsSection" class="content-section"><p class="text-white">Reviews Section</p></div>
         <div id="settingsSection" class="content-section"><p class="text-white">Settings Section</p></div>
       </main>
     </div>
   </div>
 
-  <!-- JS -->
+  <!-- JavaScript -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // Toggle active link and section
     document.querySelectorAll('.nav-link[data-section]').forEach(link => {
       link.addEventListener('click', function () {
-        // Remove active class from all links
         document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
         this.classList.add('active');
 
-        // Hide all sections
         document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active'));
-        // Show the targeted section
         const sectionId = this.getAttribute('data-section');
         document.getElementById(sectionId).classList.add('active');
       });

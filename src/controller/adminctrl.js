@@ -46,22 +46,14 @@ exports.validuserdata=((req,res)=>{
   }); 
 });
 
-exports.deleteuser=((req,res)=>{
-  let userid=req.query.userid;
-  let deluser=adminmodel.userdelete(userid);
-      deluser.then((deluse)=>{
-         res.render("home.ejs");
-      }).catch((err)=>{
-           res.render("home.ejs");
-        
-      });
-});
+
 
 exports.updateuser=((req,res)=>{
   let userid=req.query.userid;
    let userupda=adminmodel.updateuser(userid);
    userupda.then((userupdatedata)=>{
    res.render("updateuser.ejs",{userupda:userupdatedata});
+
    }).catch((err)=>{
    res.render("updateuser.ejs",{userupda:userupdatedata});
   
@@ -88,10 +80,17 @@ exports.validadmin=((req,res)=>{
     let validadminn=adminmodel.validadmindata(username,password);
     validadminn.then((validad)=>{
       if(validad.length>0)
-      {
-         if(adminkey===process.env.adminkey)
+      {    let role=validad[0].role;
+         if((adminkey===process.env.adminkey)&&role==='admin')
          {
-            res.render("admindashboard.ejs",{viewuserdata:[]});
+            //here taking all userdata
+            let viewuse=adminmodel.viewalluser();
+                viewuse.then((data)=>{
+                  res.render("admindashboard.ejs",{viewuserdata:data});
+                }).catch((err)=>{
+                  res.render("error.ejs");
+                })
+            
          }else{
             res.render("adminlogin.ejs",{msg:"invalid username and password"});
          }
@@ -113,5 +112,66 @@ exports.viewuseradmin = ((req, res) => {
     });
 });
 
+exports.deleteadmin=((req,res)=>{
+  let userid=req.query.userid;
+  let deluser=adminmodel.admindelete(userid);
+      deluser.then((deluse)=>{
+         let viewuse=adminmodel.viewalluser();
+                viewuse.then((data)=>{
+                  res.render("admindashboard.ejs",{viewuserdata:data});
+                }).catch((err)=>{
+                  res.render("error.ejs");
+                })
+      }).catch((err)=>{
+            res.render("admindashboard.ejs",{viewuserdata:data});
+        
+      });
+});
+
+
+exports.updateadmin=((req,res)=>{
+  let userid=req.query.userid;
+   let userupda=adminmodel.updateuser(userid);
+   userupda.then((userupdatedata)=>{
+   res.render("updateadmin.ejs",{userupda:userupdatedata});
+
+   }).catch((err)=>{
+   res.render("updateadmin.ejs",{userupda:userupdatedata});
+  
+   });
+});
+
+exports.finalupdateadmin=((req,res)=>{
+let {username,password,confirmpassword,contact,city,uid}=req.body;
+let finalup=adminmodel.finalupdateuser(username,password,confirmpassword,contact,city,uid);
+    finalup.then((userup)=>{
+        let viewuse=adminmodel.viewalluser();
+                viewuse.then((data)=>{
+                  res.render("admindashboard.ejs",{viewuserdata:data});
+                }).catch((err)=>{
+                  res.render("error.ejs");
+                })
+    }).catch((err)=>{
+      res.render("admindashboard.ejs",{viewuserdata:data});
+    });
+});
+
+exports.addmovie=((req,res)=>{
+   res.render("movie.ejs",{msg:""});
+});
+
+exports.savemovie=((req,res)=>{
+   let{title,description,release_date,genre,director,language,country,budget,revenue,runtime,poster_url,trailer_url,movie_url}=req.body;
+
+   let savemovi=adminmodel.savemoviee(title,description,release_date,genre,director,language,country,budget,revenue,runtime,poster_url,trailer_url,movie_url);
+       savemovi.then((savemove)=>{
+        res.render("movie.ejs",{msg:"movie details saved"});
+       }).catch((err)=>{
+        res.render("movie.ejs",{msg:"movie details not saved"});
+        
+       });
+
+
+});
 
 

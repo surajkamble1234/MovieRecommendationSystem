@@ -28,7 +28,7 @@ exports.validuserdata=((...uservalidate)=>{
   });
 });
 
-exports.userdelete=((...userdel)=>{
+exports.admindelete=((...userdel)=>{
    return new Promise((resolve,reject)=>{
       conn.query("delete from userregister where uid=?",[...userdel],(err,result)=>{
        if(err){
@@ -58,8 +58,10 @@ conn.query("update userregister set username=?,password=?,confirmpassword=?,cont
        if(err)
        {
          reject(err);
+   
        }else{
          resolve(result);
+           
        }
  });
  });
@@ -85,10 +87,22 @@ exports.viewalluser=(()=>{
         {
          reject(err);
         }else{
-          console.log(result)
          resolve(result);
         
         }
+    });
+  });
+});
+
+exports.savemoviee=((...savemovi)=>{
+  return new Promise((resolve,reject)=>{
+    conn.query("insert into movies (title, description, release_date, genre, director, language, country,budget, revenue, runtime, poster_url, trailer_url, movie_url) values(?,?,?,?,?,?,?,?,?,?,?,?,?)",[...savemovi],(err,result)=>{
+         if(err)
+         {
+          reject(err);
+         }else{
+          resolve(result);
+         }
     });
   });
 });

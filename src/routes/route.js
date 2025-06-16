@@ -9,11 +9,19 @@ router.get("/usersignup",adminctrl.usersignup);
 router.post("/useradd",adminctrl.userregister);
 router.post("/validuser",adminctrl.validuserdata);
 
-router.get("/delbyuser",adminctrl.deleteuser);
+
 router.get("/updateuser",adminctrl.updateuser);
 router.post("/finaluserupdate",adminctrl.finalupdateuser);
 //admin login
 router.get("/adminlogin",adminctrl.adminlogin);
 router.post("/validadminn",adminctrl.validadmin);
 router.get("/useradminview",adminctrl.viewuseradmin);
+router.get("/delbyuser",adminctrl.deleteadmin);
+
+router.get("/updateadmin",adminctrl.updateadmin);
+router.post("/finaladminupdate",adminctrl.finalupdateadmin);
+
+router.get("/moviee",adminctrl.addmovie);
+router.post("/savemovie",adminctrl.savemovie);
+
 module.exports=router;

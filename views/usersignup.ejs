@@ -87,65 +87,67 @@ input.invalid {
 
   <div class="login-container">
     <h2>User Signup</h2>
-    <form name="frm" action="/useradd" method="post">
-      <div class="form-group mb-4">
-        <label for="uname">Username</label>
-        <input type="text" name="username" class="form-control" id="use" placeholder="Enter Username" onkeyup="validuse()">
-         <small id="usernameMsg"></small>
-      </div>
-
-      <div class="form-group mb-4">
-        <label for="password">Password</label>
-        <input type="password" name="password" class="form-control" id="password" placeholder="Password" onkeyup="validpass()">
-         <small id="usernameMsg"></small>
-      </div>
-
-      <div class="form-group mb-4">
-        <label for="confirmPassword">Confirm Password</label>
-        <input type="password" name="confirmpassword" class="form-control" id="confirmPassword" placeholder="Confirm Password"  onkeyup="validConfirmPassword()">
-         <small id="usernameMsg"></small>
-      </div>
-
-      <div class="form-group mb-4">
-        <label for="email">Email</label>
-        <input type="text" name="email" class="form-control" id="email" placeholder="Email" onkeyup="validEmail()">
-         <small id="usernameMsg"></small>
-      </div>
-
-      <div class="form-group mb-4">
-        <label for="contact">Contact</label>
-        <input type="text" name="contact" class="form-control" id="contact" placeholder="Contact"  onkeyup="validContact()">
-         <small id="usernameMsg"></small>
-      </div>
-
-      <div class="form-group mb-4">
-        <label for="city">City</label>
-        <input type="text" name="city" class="form-control" id="city" placeholder="City" onkeyup="validCity()">
-         <small id="usernameMsg"></small>
-      </div>
-
-      <div class="form-group mb-4">
-        <select name="role" class="form-control">
-          <option value="user">user</option>
-          <option value="admin">admin</option>
-        </select>
-      </div>
-
-      <div class="form-group text-center mb-4">
-        <label class="form-check-label">Have an account? <a href="/user">Login</a></label>
-      </div>
-
-      <div class="text-center mb-3">
-        <button type="submit" class="btn btn-primary">Sign Up</button>
-      </div>
-
-      <div class="form-group form-check">
-        <label class="form-check-label"><%= msg %></label>
-      </div>
-    </form>
+   <form name="frm" action="/useradd" method="post">
+  <div class="form-group mb-4">
+    <label for="uname">Username</label>
+    <input type="text" name="username" class="form-control" id="use" placeholder="Enter Username" onkeyup="validuse()">
+    <small id="usernameMsg"></small>
   </div>
 
-  <!-- Link to external JS at the end of the body -->
+  <div class="form-group mb-4">
+    <label for="password">Password</label>
+    <input type="password" name="password" class="form-control" id="password" placeholder="Password" onkeyup="validpass()">
+    <small id="passwordMsg"></small>
+  </div>
+
+  <div class="form-group mb-4">
+    <label for="confirmPassword">Confirm Password</label>
+    <input type="password" name="confirmpassword" class="form-control" id="confirmPassword" placeholder="Confirm Password" onkeyup="validConfirmPassword()">
+    <small id="confirmPasswordMsg"></small>
+  </div>
+
+  <div class="form-group mb-4">
+    <label for="email">Email</label>
+    <input type="text" name="email" class="form-control" id="email" placeholder="Email" onkeyup="validEmail()">
+    <small id="emailMsg"></small>
+  </div>
+
+  <div class="form-group mb-4">
+    <label for="contact">Contact</label>
+    <input type="text" name="contact" class="form-control" id="contact" placeholder="Contact" onkeyup="validContact()">
+    <small id="contactMsg"></small>
+  </div>
+
+  <div class="form-group mb-4">
+    <label for="city">City</label>
+    <input type="text" name="city" class="form-control" id="city" placeholder="City" onkeyup="validCity()">
+    <small id="cityMsg"></small>
+  </div>
+
+  <div class="form-group mb-4">
+    <select name="role" class="form-control">
+      <option value="user">user</option>
+      <option value="admin">admin</option>
+    </select>
+  </div>
+
+  <div class="form-group text-center mb-4">
+    <label class="form-check-label">Have an account? <a href="/user">Login</a></label>
+  </div>
+
+  <div class="text-center mb-3">
+    <button type="submit" class="btn btn-primary">Sign Up</button>
+  </div>
+   
+  <div class="form-group form-check">
+    <label class="form-check-label"><%= msg %></label>
+  </div>
+
+ 
+</form>
+
+  </div>
+
   <script src="/validations/regvalidation.js"></script>
 </body>
 </html>
