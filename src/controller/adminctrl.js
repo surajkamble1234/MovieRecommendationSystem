@@ -112,7 +112,6 @@ exports.viewuseradmin = ((req, res) => {
     });
 });
 
-<<<<<<< HEAD
 exports.deleteadmin=((req,res)=>{
   let userid=req.query.userid;
   let deluser=adminmodel.admindelete(userid);
@@ -174,11 +173,11 @@ exports.savemovie=((req,res)=>{
 
 
 });
-=======
+
 //smart search
 const axios = require("axios");
 require("dotenv").config();
->>>>>>> fa950376a1e49669a18dcce8e9253ed737f1e0a9
+
 
 exports.smartsearch = async (req, res) => {
     try {
