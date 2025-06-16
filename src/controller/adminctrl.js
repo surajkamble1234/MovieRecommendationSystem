@@ -112,6 +112,7 @@ exports.viewuseradmin = ((req, res) => {
     });
 });
 
+<<<<<<< HEAD
 exports.deleteadmin=((req,res)=>{
   let userid=req.query.userid;
   let deluser=adminmodel.admindelete(userid);
@@ -173,5 +174,50 @@ exports.savemovie=((req,res)=>{
 
 
 });
+=======
+//smart search
+const axios = require("axios");
+require("dotenv").config();
+>>>>>>> fa950376a1e49669a18dcce8e9253ed737f1e0a9
 
+exports.smartsearch = async (req, res) => {
+    try {
+        const movieId = req.query.id || "550"; // Default movie ID
+        const apiKey = process.env.TMDB_API_KEY;
 
+        if (!apiKey) {
+            throw new Error("API key missing! Check your .env file.");
+        }
+
+        const url = `https://api.themoviedb.org/3/movie/${movieId}/recommendations?api_key=${apiKey}&language=en-US&page=1`;
+
+        const response = await axios.get(url);
+        const movies = response.data.results || [];
+
+        res.render("smartsearch", { movies, errorMsg: movies.length === 0 ? "No recommendations found." : "" });
+    } catch (error) {
+        console.error("Error fetching movie recommendations:", error.message);
+        res.render("smartsearch", { movies: [], errorMsg: "Failed to fetch movie recommendations. Try again later!" });
+    }
+};
+
+exports.searchMovies = async (req, res) => {
+    try {
+        const query = req.query.q; // Get search query from user input
+        const apiKey = process.env.TMDB_API_KEY;
+
+        if (!query) {
+            return res.render("smartsearch", { movies: [], errorMsg: "Please enter a movie name or genre." });
+        }
+
+        const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(query)}&language=en-US&page=1`;
+
+        const response = await axios.get(url);
+        const movies = response.data.results || [];
+
+        res.render("smartsearch", { movies, errorMsg: movies.length === 0 ? "No movies found. Try another search!" : "" });
+    } catch (error) {
+        console.error("Error fetching movies:", error.message);
+        res.render("smartsearch", { movies: [], errorMsg: "Failed to fetch movie recommendations. Please try again later." });
+    }
+};
