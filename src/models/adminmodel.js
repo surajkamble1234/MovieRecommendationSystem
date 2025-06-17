@@ -139,7 +139,7 @@ exports.viewmovie=((req,res)=>{
 
 exports.searchmovie=((searcmovie)=>{
  return new Promise((resolve,reject)=>{
-   conn.query("select * from movies where title like ? ",[`%${searcmovie}%`],(err,result)=>{
+   conn.query("select * from movies where title like ? or genre like ? ",[`%${searcmovie}%`,`%${searcmovie}%`],(err,result)=>{
     if(err)
     {
       reject(err);
@@ -150,3 +150,28 @@ exports.searchmovie=((searcmovie)=>{
  });
 });
 
+exports.ratingmovie=((req,res)=>{
+  return new Promise((resolve,reject)=>{
+     conn.query("select * from movies",(err,result)=>{
+       if(err)
+       {
+        reject(err);
+       }else{
+        resolve(result);
+       }
+     });
+  });
+});
+
+exports.saverating=((...saverate)=>{
+ return new Promise((resolve,reject)=>{
+ conn.query("insert into ratings(uid,mid,rating,review)values(?,?,?,?)",[...saverate],(err,result)=>{
+   if(err)
+   {
+    reject(err);
+   }else{
+    resolve(result);
+   }
+ });
+ });
+});

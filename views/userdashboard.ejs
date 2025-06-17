@@ -23,7 +23,7 @@
       <a href="/viewmovie" class="nav-link" onclick="loadContent('movies')"><i class="fas fa-video me-2"></i>View Movies</a>
       <a href="#" class="nav-link" onclick="loadContent('details')"><i class="fas fa-info-circle me-2"></i>View Profile</a>
       <a href="#" class="nav-link" onclick="loadContent('subscribe')"><i class="fas fa-bell me-2"></i>Subscribe</a>
-      <a href="#" class="nav-link" onclick="loadContent('rate')"><i class="fas fa-star me-2"></i>Rate</a>
+      <a href="/ratinguser?uid=<%=viewprof[0].uid %>&username=<%= viewprof[0].username %>" class="nav-link" onclick="loadContent('rate')"><i class="fas fa-star me-2"></i>Rating</a>
       <a href="#" class="nav-link" onclick="loadContent('comment')"><i class="fas fa-comment me-2"></i>Comment</a>
       <a href="/" class="nav-link" onclick="loadContent('logout')"><i class="fas fa-sign-in-alt me-2"></i>Logout</a>
     </div>

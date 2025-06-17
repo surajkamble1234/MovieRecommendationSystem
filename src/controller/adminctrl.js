@@ -30,6 +30,8 @@ exports.validuserdata=((req,res)=>{
   promobj.then((ress)=>{
    if(ress.length>0){
       let role=ress[0].role;
+      let uid=ress[0].uid;
+      let username=ress[0].username;
       if(role==='user')
       {
          // let name=ress[0].username;
@@ -226,6 +228,40 @@ exports.moviesearch=((req,res)=>{
       }).catch((err)=>{
         console.log(err)
       });
+});
+
+//ratinguser
+exports.ratinguser=((req,res)=>{
+  let viewmovierate=adminmodel.ratingmovie();
+  let uid=req.query.uid;
+  let username=req.query.username;
+      viewmovierate.then((viewrate)=>{
+          res.render("rateform.ejs",{ratemove:viewrate,uid,username,msg:""});
+
+      }).catch((err)=>{
+          res.render("rateform.ejs",{ratemove:viewrate,uid,username,msg:""});
+      });
+  
+});
+
+exports.saverating=((req,res)=>{
+  let {uid,mid,rating,review}=req.body;
+  let saverate=adminmodel.saverating(uid,mid,rating,review);
+      saverate.then((savere)=>{
+        let viewmovierate=adminmodel.ratingmovie();
+        let uid=req.query.uid;
+        let username=req.query.username;
+      viewmovierate.then((viewrate)=>{
+          res.render("rateform.ejs",{ratemove:viewrate,uid,username,msg:"rating submit"});
+
+      }).catch((err)=>{
+          res.render("rateform.ejs",{ratemove:viewrate,uid,username,msg:"rating submit"});
+      });
+      }).catch((err)=>{
+         res.render("rateform.ejs",{ratemove:viewrate,uid,username,msg:"rating submit"});
+     
+      });
+
 });
 
 //smart search

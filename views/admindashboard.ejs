@@ -70,8 +70,8 @@
           <li class="nav-item"><a class="nav-link active" data-section="dashboardSection"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
           <li class="nav-item"><a class="nav-link" data-section="reviewSection"><i class="bi bi-person-badge me-2"></i>Review Accounts</a></li>
           <li class="nav-item"><a class="nav-link" data-section="recommendationSection"><i class="bi bi-stars me-2"></i>Recommendations</a></li>
-          <li class="nav-item"><a class="nav-link" data-section="categorySection"><i class="bi bi-tags me-2"></i>Create Categories</a></li>
-          <li class="nav-item"><a class="nav-link" data-section="moviesSection"><i class="bi bi-film me-2"></i>All Movies</a></li>
+          <li class="nav-item"><a class="nav-link" data-section="categorySection"  href="/moviee"><i class="bi bi-tags me-2"  ></i>Add Movies</a></li>
+          <li class="nav-item"><a class="nav-link" data-section="moviesSection" href="/viewmovie"><i class="bi bi-film me-2"></i>All Movies</a></li>
           <li class="nav-item"><a class="nav-link" data-section="usersSection"><i class="bi bi-people me-2"></i>Users</a></li>
           <li class="nav-item"><a class="nav-link" data-section="reviewsSection"><i class="bi bi-chat-dots me-2"></i>Reviews</a></li>
           <li class="nav-item"><a class="nav-link" data-section="settingsSection"><i class="bi bi-gear me-2"></i>Settings</a></li>
@@ -91,13 +91,13 @@
             <div class="col-sm-6 col-md-3 mb-3">
               <div class="card bg-primary text-center p-3">
                 <div class="card-icon mb-2"><i class="bi bi-people-fill"></i> </div>
-                 <a href="/moviee">addmovie</a>
+                
               </div>
             </div>
             <div class="col-sm-6 col-md-3 mb-3">
               <div class="card bg-success text-center p-3">
                 <div class="card-icon mb-2"><i class="bi bi-film"></i></div>
-                <h5><%=totalMovies%></h5>
+                <h5></h5>
                 <p>Total Movies</p>
               </div>
             </div>
@@ -142,43 +142,10 @@
           </div>
         </div>
 
-        <!-- All Movies Section -->
-        <div id="moviesSection" class="content-section">
-          <div class="row text-white">
-            <div class="col-md-4 mb-4">
-              <div class="card bg-dark text-white h-100">
-                <img src="https://image.tmdb.org/t/p/w500/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg" class="card-img-top" alt="Movie 1">
-                <div class="card-body">
-                  <h5 class="card-title">Movie Title 1</h5>
-                  <p class="card-text">Short description for movie 1</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 mb-4">
-              <div class="card bg-dark text-white h-100">
-                <img src="https://image.tmdb.org/t/p/w500/bOGkgRGdhrBYJSLpXaxhXVstddV.jpg" class="card-img-top" alt="Movie 2">
-                <div class="card-body">
-                  <h5 class="card-title">Movie Title 2</h5>
-                  <p class="card-text">Short description for movie 2</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 mb-4">
-              <div class="card bg-dark text-white h-100">
-                <img src="https://image.tmdb.org/t/p/w500/fnbjcRDYN8zTiT6d6GqhB4O5GLY.jpg" class="card-img-top" alt="Movie 3">
-                <div class="card-body">
-                  <h5 class="card-title">Movie Title 3</h5>
-                  <p class="card-text">Short description for movie 3</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <!-- Other Sections -->
         <div id="reviewSection" class="content-section"><p class="text-white">Review Accounts Section</p></div>
         <div id="recommendationSection" class="content-section"><p class="text-white">Recommendations Section</p></div>
-        <div id="categorySection" class="content-section"><p class="text-white">Create Categories Section</p></div>
+        <div id="categorySection" class="content-section"><p class="text-white">AddMovie</p></div>
          <div id="usersSection" class="content-section">
   <p class="text-white">Users Section</p>
   <div class="container mt-5">

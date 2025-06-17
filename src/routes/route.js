@@ -29,10 +29,9 @@ router.get("/home2",adminctrl.home2);
 router.get("/smart",adminctrl.smartsearch);
 router.get("/search", adminctrl.searchMovies);
 
-
-
-
-
+//ratinguser
+router.get("/ratinguser",adminctrl.ratinguser);
+router.post("/saverating",adminctrl.saverating);
 router.get("/viewmovie",adminctrl.viewmovie);
 router.get("/moviesearch",adminctrl.moviesearch);
 
