@@ -220,3 +220,7 @@ exports.searchMovies = async (req, res) => {
         res.render("smartsearch", { movies: [], errorMsg: "Failed to fetch movie recommendations. Please try again later." });
     }
 };
+
+exports.home2=((req,res)=>{
+  res.render("homeanimation.ejs");
+})

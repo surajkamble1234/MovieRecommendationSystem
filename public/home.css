@@ -114,3 +114,12 @@ $gr-3:linear-gradient(170deg, #C86DD7 0%, #3023AE 100%);
    }
 }
 
+
+/*cards */
+
+
+.movie-card img {
+            height: 200px;
+            object-fit: cover;
+        }
+
