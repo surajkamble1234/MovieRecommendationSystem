@@ -16,6 +16,7 @@ router.post("/finaluserupdate",adminctrl.finalupdateuser);
 router.get("/adminlogin",adminctrl.adminlogin);
 router.post("/validadminn",adminctrl.validadmin);
 router.get("/useradminview",adminctrl.viewuseradmin);
+
 router.get("/delbyuser",adminctrl.deleteadmin);
 
 router.get("/updateadmin",adminctrl.updateadmin);
@@ -23,10 +24,22 @@ router.post("/finaladminupdate",adminctrl.finalupdateadmin);
 
 router.get("/moviee",adminctrl.addmovie);
 router.post("/savemovie",adminctrl.savemovie);
+
 router.get("/home2",adminctrl.home2);
 router.get("/smart",adminctrl.smartsearch);
 router.get("/search", adminctrl.searchMovies);
 
+
+
+
+
+router.get("/viewmovie",adminctrl.viewmovie);
+router.get("/moviesearch",adminctrl.moviesearch);
+
+//search movie
+//Movie Recommendations Route
+router.get("/smart", adminctrl.smartsearch);
+router.get("/search", adminctrl.searchMovies);
 
 
 

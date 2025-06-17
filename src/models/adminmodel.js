@@ -1,3 +1,4 @@
+const { resolve } = require("path");
 let conn=require("../../db.js");
 
 exports.addregisterdata=((...register)=>{
@@ -121,5 +122,31 @@ exports.savemoviee=((...savemovi)=>{
          }
     });
   });
+});
+
+
+exports.viewmovie=((req,res)=>{
+  return new Promise((resolve,reject)=>{
+    conn.query("select * from movies",(err,result)=>{
+       if(err){
+        reject(err);
+       }else{
+        resolve(result);
+       }
+    });
+  });
+});
+
+exports.searchmovie=((searcmovie)=>{
+ return new Promise((resolve,reject)=>{
+   conn.query("select * from movies where title like ? ",[`%${searcmovie}%`],(err,result)=>{
+    if(err)
+    {
+      reject(err);
+    }else{
+      resolve(result);
+    }
+   });
+ });
 });
 

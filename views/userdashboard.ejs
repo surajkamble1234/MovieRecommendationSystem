@@ -20,7 +20,7 @@
 
       <a href="/" class="nav-link active" onclick="loadContent('home')"><i class="fas fa-home me-2"></i>Home</a>
       <a href="#" class="nav-link" onclick="loadContent('search')"><i class="fas fa-search me-2"></i>Search</a>
-      <a href="#" class="nav-link" onclick="loadContent('movies')"><i class="fas fa-video me-2"></i>View Movies</a>
+      <a href="/viewmovie" class="nav-link" onclick="loadContent('movies')"><i class="fas fa-video me-2"></i>View Movies</a>
       <a href="#" class="nav-link" onclick="loadContent('details')"><i class="fas fa-info-circle me-2"></i>View Profile</a>
       <a href="#" class="nav-link" onclick="loadContent('subscribe')"><i class="fas fa-bell me-2"></i>Subscribe</a>
       <a href="#" class="nav-link" onclick="loadContent('rate')"><i class="fas fa-star me-2"></i>Rate</a>
@@ -45,8 +45,10 @@
       // Simple content rendering logic
       const content = {
         home: `<h2>🏠 Home</h2><p>This is the home page of your dashboard.</p>`,
-        search: `<h2>🔍 Search Movies</h2><p>You can search movies here.</p>`,
-        movies:  `cd`,
+        search: `<h2>🔍 Search Movies</h2><p>You can search movies here.</p>
+                 
+                `,
+        movies:  ``,
         details: `
                   <div class="container mt-5">
   <div class="row justify-content-center">
@@ -118,7 +120,9 @@
   </script>
 
   <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+  </script>
+ 
 </body>
 </html>
  

@@ -209,8 +209,24 @@ exports.savemovie=((req,res)=>{
 });
 
 
+exports.viewmovie=((req,res)=>{
+  let viewmovie=adminmodel.viewmovie();
+  viewmovie.then((viewmo)=>{
+    res.render("viewmovie.ejs",{viewm:viewmo});
+  }).catch((err)=>{
+    res.render("viewmovie.ejs",{viewm:viewmo});
+  });
+});
 
-
+exports.moviesearch=((req,res)=>{
+  let searchname=req.query.sm;
+  let searchobj=adminmodel.searchmovie(searchname);
+      searchobj.then((seaobj)=>{
+       res.send(seaobj);
+      }).catch((err)=>{
+        console.log(err)
+      });
+});
 
 //smart search
 const axios = require("axios");
