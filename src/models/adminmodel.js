@@ -94,6 +94,22 @@ exports.viewalluser=(()=>{
   });
 });
 
+exports.allmovies=(()=>{
+   return new Promise((resolve,reject)=>{
+    conn.query("select count(*) from movies ",(err,result)=>{
+        if(err)
+        {
+         reject(err);
+        }else{
+         resolve(result);
+        
+        }
+    });
+  });
+})
+
+
+
 exports.savemoviee=((...savemovi)=>{
   return new Promise((resolve,reject)=>{
     conn.query("insert into movies (title, description, release_date, genre, director, language, country,budget, revenue, runtime, poster_url, trailer_url, movie_url) values(?,?,?,?,?,?,?,?,?,?,?,?,?)",[...savemovi],(err,result)=>{
@@ -106,3 +122,4 @@ exports.savemoviee=((...savemovi)=>{
     });
   });
 });
+

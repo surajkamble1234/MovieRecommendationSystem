@@ -75,32 +75,67 @@ exports.adminlogin=((req,res)=>{
    res.render("adminlogin.ejs",{msg:""});
 });
 
-exports.validadmin=((req,res)=>{
-    let{username,password,adminkey}=req.body;
-    let validadminn=adminmodel.validadmindata(username,password);
-    validadminn.then((validad)=>{
-      if(validad.length>0)
-      {    let role=validad[0].role;
-         if((adminkey===process.env.adminkey)&&role==='admin')
-         {
-            //here taking all userdata
-            let viewuse=adminmodel.viewalluser();
-                viewuse.then((data)=>{
-                  res.render("admindashboard.ejs",{viewuserdata:data});
-                }).catch((err)=>{
-                  res.render("error.ejs");
-                })
+// exports.validadmin=((req,res)=>{
+//     let{username,password,adminkey}=req.body;
+//     let validadminn=adminmodel.validadmindata(username,password);
+//     validadminn.then((validad)=>{
+//       if(validad.length>0)
+//       {    let role=validad[0].role;
+//          if((adminkey===process.env.adminkey)&&role==='admin')
+//          {
+//             //here taking all userdata
+//             let viewuse=adminmodel.viewalluser();
+//                 viewuse.then((data)=>{
+//                   res.render("admindashboard.ejs",{viewuserdata:data});
+//                 }).catch((err)=>{
+//                   res.render("error.ejs");
+//                 })
+               
             
-         }else{
-            res.render("adminlogin.ejs",{msg:"invalid username and password"});
-         }
-      }else{
-         res.render("adminlogin.ejs",{msg:"invalid username and password"});
-      }
-    }).catch((err)=>{
-         res.render("error.ejs");
+//          }else{
+//             res.render("adminlogin.ejs",{msg:"invalid username and password"});
+//          }
+//       }else{
+//          res.render("adminlogin.ejs",{msg:"invalid username and password"});
+//       }
+//     }).catch((err)=>{
+//          res.render("error.ejs");
+//     });
+// });
+exports.validadmin = (req, res) => {
+    let { username, password, adminkey } = req.body;
+    let validadminn = adminmodel.validadmindata(username, password);
+
+    validadminn.then((validad) => {
+        if (validad.length > 0) {
+            let role = validad[0].role;
+
+            if ((adminkey === process.env.adminkey) && role === 'admin') {
+                let viewuse = adminmodel.viewalluser();
+                let totalMovies = adminmodel.allmovies();
+
+                Promise.all([viewuse, totalMovies])
+                    .then(([userData, movieData]) => {
+                        res.render("admindashboard.ejs", {
+                            viewuserdata: userData,
+                            totalMovies: movieData[0]['count(*)'] // Extract count from result
+                        });
+                    })
+                    .catch((err) => {
+                        res.render("error.ejs");
+                    });
+
+            } else {
+                res.render("adminlogin.ejs", { msg: "Invalid username or password" });
+            }
+        } else {
+            res.render("adminlogin.ejs", { msg: "Invalid username or password" });
+        }
+    }).catch((err) => {
+        res.render("error.ejs");
     });
-});
+};
+
 
 exports.viewuseradmin = ((req, res) => {
   adminmodel.viewalluser()
@@ -166,13 +201,16 @@ exports.savemovie=((req,res)=>{
    let savemovi=adminmodel.savemoviee(title,description,release_date,genre,director,language,country,budget,revenue,runtime,poster_url,trailer_url,movie_url);
        savemovi.then((savemove)=>{
         res.render("movie.ejs",{msg:"movie details saved"});
+       
        }).catch((err)=>{
         res.render("movie.ejs",{msg:"movie details not saved"});
         
        });
-
-
 });
+
+
+
+
 
 //smart search
 const axios = require("axios");
