@@ -29,4 +29,5 @@ router.get("/search", adminctrl.searchMovies);
 
 
 
+
 module.exports=router;
