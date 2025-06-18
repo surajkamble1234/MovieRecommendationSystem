@@ -137,6 +137,18 @@ exports.viewmovie=((req,res)=>{
   });
 });
 
+exports.getAllMovies = () => {
+  return new Promise((resolve, reject) => {
+    conn.query("SELECT title, poster_url, trailer_url, movie_url FROM movies", (err, result) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(result);
+      }
+    });
+  });
+};
+
 exports.searchmovie=((searcmovie)=>{
  return new Promise((resolve,reject)=>{
    conn.query("select * from movies where title like ? or genre like ? ",[`%${searcmovie}%`,`%${searcmovie}%`],(err,result)=>{
@@ -185,6 +197,19 @@ exports.viewreview=((req,res)=>{
     }else{
       resolve(result);
     }
+   });
+  });
+});
+
+exports.savewatch=((...watch)=>{
+  return new Promise((resolve,reject)=>{
+   conn.query("insert into watchlist(uid,mid)values(?,?)",[...watch],(err,result)=>{
+   if(err)
+   {
+    reject(err);
+   }else{
+    resolve(result);
+   }
    });
   });
 });

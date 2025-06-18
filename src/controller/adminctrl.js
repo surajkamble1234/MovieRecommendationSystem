@@ -192,10 +192,20 @@ let finalup=adminmodel.finalupdateuser(username,password,confirmpassword,contact
       res.render("admindashboard.ejs",{viewuserdata:data});
     });
 });
-
+// movie section
 exports.addmovie=((req,res)=>{
    res.render("movie.ejs",{msg:""});
 });
+//usermovie 
+exports.usermovies = (req, res) => {
+  let allMovies = adminmodel.getAllMovies(); // ✅ Fetch movie details
+  
+  allMovies.then((movies) => {
+    res.json(movies); // ✅ Send JSON response
+  }).catch((err) => {
+    res.status(500).json({ error: "Error fetching movies" });
+  });
+};
 
 exports.savemovie=((req,res)=>{
    let{title,description,release_date,genre,director,language,country,budget,revenue,runtime,poster_url,trailer_url,movie_url}=req.body;
@@ -255,10 +265,10 @@ exports.saverating=((req,res)=>{
           res.render("rateform.ejs",{ratemove:viewrate,uid,username,msg:"rating submit"});
 
       }).catch((err)=>{
-          res.render("rateform.ejs",{ratemove:viewrate,uid,username,msg:"rating submit"});
+          res.render("rateform.ejs",{ratemove:viewrate,uid,username,msg:"rating not submit"});
       });
       }).catch((err)=>{
-         res.render("rateform.ejs",{ratemove:viewrate,uid,username,msg:"rating submit"});
+         res.render("rateform.ejs",{ratemove:viewrate,uid,username,msg:"rating not submit"});
      
       });
 
@@ -271,6 +281,42 @@ exports.reviewmovie=((req,res)=>{
       }).catch((err)=>{
       res.render("review.ejs",{viewrate:ratemove});
       });
+});
+
+//watchlist
+exports.watchlist=((req,res)=>{
+  let watchobj=adminmodel.viewmovie();
+      let useri=req.session.user_id;
+      let user=req.session.usernamee;
+      
+      watchobj.then((watch)=>{
+        res.render("watchlist.ejs",{wamove:watch,id:useri,name:user,msg:""});
+      }).catch((err)=>{
+          console.log(err)
+         res.render("watchlist.ejs",{wamove:watch,id:useri,name:user,msg:""});
+      });
+
+});
+
+exports.savewatchlistt=((req,res)=>{
+  let {uid,mid}=req.body;
+   let savewatch=adminmodel.savewatch(uid,mid);
+       savewatch.then((sawa)=>{
+        
+      let watchobj=adminmodel.viewmovie();
+      watchobj.then((watch)=>{
+      let useri=req.session.user_id;
+      let user=req.session.usernamee;
+        res.render("watchlist.ejs",{wamove:watch,id:useri,name:user,msg:"watchlist submit"});
+      }).catch((err)=>{
+  
+         res.render("watchlist.ejs",{wamove:watch,id:useri,name:user,msg:"not save"});
+
+      }).catch((err)=>{
+      
+         res.render("watchlist.ejs",{wamove:watch,id:useri,name:user,msg:"not save"});
+      });
+    });
 });
 
 
