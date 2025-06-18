@@ -30,8 +30,8 @@ exports.validuserdata=((req,res)=>{
   promobj.then((ress)=>{
    if(ress.length>0){
       let role=ress[0].role;
-      let uid=ress[0].uid;
-      let username=ress[0].username;
+      req.session.user_id=ress[0].uid;
+      req.session.usernamee=ress[0].username;
       if(role==='user')
       {
          // let name=ress[0].username;
@@ -233,8 +233,8 @@ exports.moviesearch=((req,res)=>{
 //ratinguser
 exports.ratinguser=((req,res)=>{
   let viewmovierate=adminmodel.ratingmovie();
-  let uid=req.query.uid;
-  let username=req.query.username;
+  let uid=req.session.user_id;
+  let username=req.session.usernamee;
       viewmovierate.then((viewrate)=>{
           res.render("rateform.ejs",{ratemove:viewrate,uid,username,msg:""});
 
@@ -249,8 +249,8 @@ exports.saverating=((req,res)=>{
   let saverate=adminmodel.saverating(uid,mid,rating,review);
       saverate.then((savere)=>{
         let viewmovierate=adminmodel.ratingmovie();
-        let uid=req.query.uid;
-        let username=req.query.username;
+        let uid=req.session.user_id;
+        let username=req.session.usernamee;
       viewmovierate.then((viewrate)=>{
           res.render("rateform.ejs",{ratemove:viewrate,uid,username,msg:"rating submit"});
 
@@ -263,6 +263,16 @@ exports.saverating=((req,res)=>{
       });
 
 });
+
+exports.reviewmovie=((req,res)=>{
+  let reviewmove=adminmodel.viewreview();
+      reviewmove.then((ratemove)=>{
+      res.render("review.ejs",{viewrate:ratemove});
+      }).catch((err)=>{
+      res.render("review.ejs",{viewrate:ratemove});
+      });
+});
+
 
 //smart search
 const axios = require("axios");

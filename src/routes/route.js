@@ -34,6 +34,7 @@ router.get("/ratinguser",adminctrl.ratinguser);
 router.post("/saverating",adminctrl.saverating);
 router.get("/viewmovie",adminctrl.viewmovie);
 router.get("/moviesearch",adminctrl.moviesearch);
+router.get("/reviewmovie",adminctrl.reviewmovie);
 
 //search movie
 //Movie Recommendations Route

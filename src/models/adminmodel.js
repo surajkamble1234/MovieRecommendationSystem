@@ -175,3 +175,16 @@ exports.saverating=((...saverate)=>{
  });
  });
 });
+
+exports.viewreview=((req,res)=>{
+  return new Promise((resolve,reject)=>{
+   conn.query("select u.username,m.title,r.rating,r.review from userregister u inner join ratings r on u.uid=r.uid inner join movies m on m.mid=r.mid  ",(err,result)=>{
+    if(err)
+    {
+      reject(err);
+    }else{
+      resolve(result);
+    }
+   });
+  });
+});
