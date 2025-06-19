@@ -292,7 +292,8 @@ exports.finalupdatemovie=((req,res)=>{
 
 //ratinguser
 exports.ratinguser=((req,res)=>{
-  let viewmovierate=adminmodel.ratingmovie();
+  let mid=req.query.mid;
+  let viewmovierate=adminmodel.ratingmovie(mid);
   let uid=req.session.user_id;
   let username=req.session.usernamee;
       viewmovierate.then((viewrate)=>{
@@ -335,10 +336,11 @@ exports.reviewmovie=((req,res)=>{
 
 //watchlist
 exports.watchlist=((req,res)=>{
-  let watchobj=adminmodel.viewmovie();
+  let mid=req.query.mid;
+  let watchobj=adminmodel.updatemovie(mid);
       let useri=req.session.user_id;
       let user=req.session.usernamee;
-      
+     
       watchobj.then((watch)=>{
         res.render("watchlist.ejs",{wamove:watch,id:useri,name:user,msg:""});
       }).catch((err)=>{
@@ -369,6 +371,48 @@ exports.savewatchlistt=((req,res)=>{
     });
 });
 
+exports.viewwatchlist=((req,res)=>{
+let userwatchid=req.session.user_id;
+let viewwatchobj=adminmodel.viewwatchlist(userwatchid);
+    viewwatchobj.then((viewwa)=>{
+     res.render("viewuserwatch.ejs",{viewatch:viewwa});
+    }).catch((err)=>{
+      console.log(err);
+    });
+
+});
+
+exports.addrecommend=((req,res)=>{
+ let mid=req.query.mid;
+  let addrecomm=adminmodel.updatemovie(mid);
+      addrecomm.then((adreco)=>{
+      let recommenduserid=req.session.user_id;
+      let recommendusername=req.session.usernamee; 
+       res.render("addrecommend.ejs",{adre:adreco,id:recommenduserid,name:recommendusername,msg:""});
+      }).catch((err)=>{
+         console.log(err);
+      });
+});
+
+exports.saverecommend=((req,res)=>{
+  let {uid,mid}=req.body;
+  let saverecommobj=adminmodel.addrecommend(uid,mid);
+      saverecommobj.then((recomove)=>{
+       let mid=req.query.mid;
+      let addrecomm=adminmodel.updatemovie(mid);
+      addrecomm.then((adreco)=>{
+      let recommenduserid=req.session.user_id;
+      let recommendusername=req.session.usernamee; 
+       res.render("addrecommend.ejs",{adre:adreco,id:recommenduserid,name:recommendusername,msg:"recommended"});
+      }).catch((err)=>{
+        res.render("addrecommend.ejs",{adre:adreco,id:recommenduserid,name:recommendusername,msg:"not recommended"});
+      });
+
+      }).catch((err)=>{
+        console.log(err)
+        
+      });
+})
 
 //smart search
 const axios = require("axios");

@@ -141,6 +141,8 @@
                 <th>Trailer</th>
                 <th>Movie</th>
                 <th>Watchlist</th>
+                <th>rating</th>
+                <th>recommend</th>
               </tr>
           </thead>
           <tbody id="tblbody">
@@ -172,10 +174,22 @@
                   </a>
                 </td>
                 <td>
-                  <a href="/addToWatchlist/<%= item.id %>" class="btn btn-sm btn-warning">
+                  <a href="/watchlist?mid=<%= item.mid %>" class="btn btn-sm btn-warning">
                     <i class="bi bi-plus-circle"></i>
                   </a>
                 </td>
+                <td>
+                  <a href="/ratinguser?mid=<%= item.mid %>" class="btn btn-sm btn-warning">
+                    <i class="bi bi-plus-circle"></i>
+                  </a>
+                </td>
+
+                 <td>
+                  <a href="/recommended?mid=<%= item.mid %>" class="btn btn-sm btn-warning">
+                    <i class="bi bi-plus-circle"></i>
+                  </a>
+                </td>
+
               </tr>
             <% }) } else { %>
               <tr>

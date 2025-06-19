@@ -200,9 +200,9 @@ exports.finalupdate=((...finalmove)=>{
  });
 });
 
-exports.ratingmovie=((req,res)=>{
+exports.ratingmovie=((...ratemove)=>{
   return new Promise((resolve,reject)=>{
-     conn.query("select * from movies",(err,result)=>{
+     conn.query("select * from movies where mid=?",[...ratemove],(err,result)=>{
        if(err)
        {
         reject(err);
@@ -250,4 +250,29 @@ exports.savewatch=((...watch)=>{
    }
    });
   });
+});
+
+exports.viewwatchlist=((...wause)=>{
+  return new Promise((resolve,reject)=>{
+   conn.query("select m.title,m.poster_url,m.trailer_url,m.movie_url from movies m join watchlist w on m.mid=w.mid join userregister u on w.uid=u.uid where u.uid=?",[...wause],(err,result)=>{
+    if(err)
+    {
+      reject(err);
+    }else{
+      resolve(result);
+    }
+   });
+  });
+});
+
+exports.addrecommend=((...addreco)=>{
+ return new Promise((resolve,reject)=>{
+ conn.query("insert into recommendations(uid,mid)values(?,?) ",[...addreco],(err,result)=>{
+  if(err){
+    reject(err);
+  }else{
+    resolve(result);
+  }
+ });
+ });
 });
