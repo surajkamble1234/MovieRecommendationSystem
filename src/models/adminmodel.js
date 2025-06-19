@@ -189,7 +189,7 @@ exports.updatemovie=((...updatemove)=>{
 
 exports.finalupdate=((...finalmove)=>{
  return new Promise((resolve,reject)=>{
- conn.query("update movies set title=?,description=?, release_date=?, genre=?, director=?, language=?, country=?,budget=?, revenue=?, runtime=?, poster_url=?, trailer_url=?, movie_url=? where mid=?",[...finalmove],(err,result)=>{
+ conn.query("update movies set title=?,description=?, release_date=?, genre=?, director=?, language=?, country=?,budget=?, revenue=?, runtime=?, poster_url=?, trailer_url=?, movie_url=? where mid=? ",[...finalmove],(err,result)=>{
   if(err)
   {
     reject(err);

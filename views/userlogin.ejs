@@ -12,7 +12,10 @@
 
   <style>
     body {
-      background: linear-gradient(135deg, #74ebd5, #acb6e5);
+     background: #0F2027;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to top, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to top, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       justify-content: center;
       align-items: center;
@@ -57,6 +60,19 @@
     .form-check-label a:hover {
       text-decoration: underline;
     }
+    .login-container
+    {
+      background-color: #0F2027;
+      
+    }
+    .txt-color
+    {
+      color: white;
+    }
+    #heads
+    {
+      color: white;
+    }
   </style>
 </head>
 
@@ -64,19 +80,19 @@
    <%- include("dashboard.ejs") %>
   <div class="login-container">
     
-    <h2>User Login</h2>
+    <h2 id="heads">User Login</h2>
     <form name="frm" action="/validuser" method="post">
       <div class="form-group">
-        <label for="usernameEmail">Username</label>
+        <label for="usernameEmail" class="txt-color">Username</label>
         <input type="text" name="username" class="form-control" id="usernameEmail" placeholder="Enter username">
       </div>
       <div class="form-group">
-        <label for="adminPassword">Password</label>
+        <label for="adminPassword" class="txt-color">Password</label>
         <input type="password" name="password" class="form-control" id="adminPassword" placeholder=" Enter password">
       </div>
       
       <div class="form-group form-check">
-        <label class="form-check-label">Don't have an account? <a href="/usersignup">Sign Up</a></label>
+        <label class="form-check-label txt-color" >Don't have an account? <a href="/usersignup">Sign Up</a></label>
       </div>
       <button type="submit" class="btn btn-primary">Login</button>
 
