@@ -54,11 +54,11 @@ let ajaxfile = (str) => {
                 col = document.createElement("td");
                 col.innerHTML = "" + item.runtime;
                 row.appendChild(col);
-
+      
                 col = document.createElement("td");
-                col.innerHTML = `<a href="${item.poster_url}" target="_blank">View</a>`;
+                col.innerHTML = `<img src="${item.poster_url}" alt="Poster" width="40" height="60" target="_blank"></=>`;
                 row.appendChild(col);
-
+ 
                 col = document.createElement("td");
                 col.innerHTML = `<a href="${item.trailer_url}" target="_blank">Watch</a>`;
                 row.appendChild(col);

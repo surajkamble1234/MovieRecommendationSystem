@@ -230,6 +230,15 @@ exports.viewmovie=((req,res)=>{
   });
 });
 
+exports.userviewmovie=((req,res)=>{
+  let viewmovie=adminmodel.viewmovie();
+  viewmovie.then((viewmo)=>{
+    res.render("usermovieview.ejs",{viewm:viewmo});
+  }).catch((err)=>{
+    res.render("usermovieview.ejs",{viewm:viewmo});
+  });
+});
+
 exports.moviesearch=((req,res)=>{
   let searchname=req.query.sm;
   let searchobj=adminmodel.searchmovie(searchname);
@@ -238,6 +247,47 @@ exports.moviesearch=((req,res)=>{
       }).catch((err)=>{
         console.log(err)
       });
+});
+
+exports.deletemovies=((req,res)=>{
+  let mid=req.query.mid;
+    let delobj=adminmodel.deletemovie(mid);
+        delobj.then((del)=>{
+        let viewmovie=adminmodel.viewmovie();
+        viewmovie.then((viewmo)=>{
+        res.render("viewmovie.ejs",{viewm:viewmo});
+        }).catch((err)=>{
+        res.render("viewmovie.ejs",{viewm:viewmo});
+        });
+        }).catch((err)=>{
+         console.log(err)
+        });
+});
+
+exports.updatemovie=((req,res)=>{
+ let mid=req.query.mid;
+ let updateobj=adminmodel.updatemovie(mid);
+     updateobj.then((updamove)=>{
+     res.render("updatemovie.ejs",{upmove:updamove,msg:""});
+     }).catch((err)=>{
+      console.log(err);
+     });
+
+});
+
+exports.finalupdatemovie=((req,res)=>{
+ let{title,description,release_date,genre,director,language,country,budget,revenue,runtime,poster_url,trailer_url,movie_url,mid}=req.body;
+ let finalmove=adminmodel.finalupdate(title,description,release_date,genre,director,language,country,budget,revenue,runtime,poster_url,trailer_url,movie_url,mid);
+     finalmove.then((finalmovee)=>{
+      let updateobj=adminmodel.updatemovie(mid);
+     updateobj.then((updamove)=>{
+     res.render("updatemovie.ejs",{upmove:updamove,msg:"update successfully"});
+     }).catch((err)=>{
+      console.log(err);
+     });
+     }).catch((err)=>{
+     res.render("updatemovie.ejs",{upmove:updamove,msg:"update not successfully"});
+     });
 });
 
 //ratinguser

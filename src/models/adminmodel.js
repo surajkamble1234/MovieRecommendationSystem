@@ -145,8 +145,8 @@ exports.getAllMovies = () => {
       } else {
         resolve(result);
       }
-    });
-  });
+     });
+   });
 };
 
 exports.searchmovie=((searcmovie)=>{
@@ -159,6 +159,44 @@ exports.searchmovie=((searcmovie)=>{
       resolve(result);
     }
    });
+ });
+});
+
+exports.deletemovie=((...delmove)=>{
+  return new Promise((resolve,reject)=>{
+    conn.query("delete from movies where mid=?",[...delmove],(err,result)=>{
+      if(err)
+      {
+        reject(err);
+      }else{
+        resolve(result);
+      }
+    });
+  });
+});
+
+exports.updatemovie=((...updatemove)=>{
+  return new Promise((resolve,reject)=>{
+   conn.query("select * from movies where mid=?",[...updatemove],(err,result)=>{
+    if(err){
+      reject(err);
+    }else{
+      resolve(result);
+    }
+   });  
+  });
+});
+
+exports.finalupdate=((...finalmove)=>{
+ return new Promise((resolve,reject)=>{
+ conn.query("update movies set title=?,description=?, release_date=?, genre=?, director=?, language=?, country=?,budget=?, revenue=?, runtime=?, poster_url=?, trailer_url=?, movie_url=? where mid=?",[...finalmove],(err,result)=>{
+  if(err)
+  {
+    reject(err);
+  }else{
+    resolve(result);
+  }
+ });
  });
 });
 

@@ -87,7 +87,7 @@
         <ul class="nav flex-column">
           <li class="nav-item"><a href="/" class="nav-link active" data-section="homeSection"><i class="fas fa-home me-2"></i>Home</a></li>
           <li class="nav-item"><a class="nav-link" data-section="searchSection"><i class="fas fa-search me-2"></i>Search</a></li>
-          <li class="nav-item"><a class="nav-link" data-section="moviesSection"><i class="fas fa-video me-2"></i>View Movies</a></li>
+          <li class="nav-item"><a href="/userviewmove" class="nav-link" data-section="moviesSection"><i class="fas fa-video me-2"></i>View Movies</a></li>
           <li class="nav-item"><a class="nav-link" data-section="detailsSection"><i class="fas fa-info-circle me-2"></i>View Profile</a></li>
           <li class="nav-item"><a class="nav-link" data-section="subscribeSection"><i class="fas fa-bell me-2"></i>Subscribe</a></li>
           <li class="nav-item"><a href="/ratinguser" class="nav-link" data-section="rateSection"><i class="fas fa-star me-2"></i>Rating</a></li>
@@ -111,7 +111,7 @@
 
           <!-- ✅ View Movies Section with Dynamic Card Grid -->
          <div id="moviesSection" class="content-section">
-           <h2>🎬 All Movies</h2>
+           
             <div class="container">
              <div class="row" id="moviesContainer">
            <!-- Movies will load here dynamically -->
@@ -170,32 +170,6 @@
       const sectionId = this.getAttribute('data-section');
       document.getElementById(sectionId)?.classList.add('active');
 
-      // ✅ Fetch movies dynamically when clicking "View Movies"
-      if (sectionId === "moviesSection") {
-        fetch('/usermovies')
-          .then(response => response.json())
-          .then(movies => {
-            const container = document.getElementById('moviesContainer');
-            container.innerHTML = ""; // Clear previous content
-
-            movies.forEach(movie => {
-              const movieCard = `
-                <div class="col-md-4 mb-3">
-                  <div class="card shadow-sm movie-card">
-                    <img src="${movie.poster_url}" class="card-img-top" alt="${movie.title}">
-                    <div class="card-body">
-                      <h5 class="card-title">${movie.title}</h5>
-                      <a href="${movie.trailer_url}" class="btn btn-outline-danger" target="_blank">Watch Trailer</a>
-                      <a href="${movie.movie_url}" class="btn btn-outline-success" target="_blank">Play Movie</a>
-                    </div>
-                  </div>
-                </div>
-              `;
-              container.innerHTML += movieCard;
-            });
-          })
-          .catch(error => console.error("Error fetching movies:", error));
-      }
     });
   });
 

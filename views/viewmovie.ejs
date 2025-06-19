@@ -71,6 +71,8 @@
                 <th>Poster</th>
                 <th>Trailer</th>
                 <th>Movie</th>
+                <th>delete</th>
+                <th>update</th>
               </tr>
             </thead>
             <tbody id="tblbody">
@@ -88,9 +90,11 @@
                     <td><%= item.budget %></td>
                     <td><%= item.revenue %></td>
                     <td><%= item.runtime %></td>
-                    <td><a href="<%= item.poster_url %>" target="_blank" class="btn btn-sm btn-outline-primary">View</a></td>
+                    <td><img src="<%= item.poster_url %>" target="_blank" class="btn btn-sm btn-outline-primary" width="40px" height="60px"></img></td>
                     <td><a href="<%= item.trailer_url %>" target="_blank" class="btn btn-sm btn-outline-success">Watch</a></td>
                     <td><a href="<%= item.movie_url %>" target="_blank" class="btn btn-sm btn-outline-danger">Play</a></td>
+                    <td><a href="/deletemovie?mid=<%=item.mid%>">delete</a></td>
+                    <td><a href="/updatemovie?mid=<%=item.mid%>">update</a></td>
                   </tr>
               <% }) 
               } else { %>

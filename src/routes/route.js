@@ -26,8 +26,13 @@ router.post("/finaladminupdate",adminctrl.finalupdateadmin);
 router.get("/moviee",adminctrl.addmovie);
 router.post("/savemovie",adminctrl.savemovie);
 router.get("/viewmovie",adminctrl.viewmovie);
+router.get("/userviewmove",adminctrl.userviewmovie);
 router.get("/moviesearch",adminctrl.moviesearch);
 router.get("/usermovies", adminctrl.usermovies);
+
+router.get("/deletemovie",adminctrl.deletemovies);
+router.get("/updatemovie",adminctrl.updatemovie);
+router.post("/finalupdatemovie",adminctrl.finalupdatemovie);
 
 router.get("/home2",adminctrl.home2);
 
