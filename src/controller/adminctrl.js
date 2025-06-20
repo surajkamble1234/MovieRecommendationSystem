@@ -1,4 +1,5 @@
 let adminmodel=require("../models/adminmodel.js");
+
 let dotenv=require("dotenv").config();
 
 exports.adminctrl=((req,res)=>{
@@ -77,69 +78,35 @@ exports.adminlogin=((req,res)=>{
    res.render("adminlogin.ejs",{msg:""});
 });
 
-// exports.validadmin=((req,res)=>{
-//     let{username,password,adminkey}=req.body;
-//     let validadminn=adminmodel.validadmindata(username,password);
-//     validadminn.then((validad)=>{
-//       if(validad.length>0)
-//       {    let role=validad[0].role;
-//          if((adminkey===process.env.adminkey)&&role==='admin')
-//          {
-//             //here taking all userdata
-//             let viewuse=adminmodel.viewalluser();
-//                 viewuse.then((data)=>{
-//                   res.render("admindashboard.ejs",{viewuserdata:data});
-//                 }).catch((err)=>{
-//                   res.render("error.ejs");
-//                 })
+exports.validadmin=((req,res)=>{
+    let{username,password,adminkey}=req.body;
+    let validadminn=adminmodel.validadmindata(username,password);
+    validadminn.then((validad)=>{
+      if(validad.length>0)
+      {    let role=validad[0].role;
+         if((adminkey===process.env.adminkey)&&role==='admin')
+         {   req.session.isadmin=true;
+            //here taking all userdata
+            let viewuse=adminmodel.viewalluser();
+                viewuse.then((data)=>{
+                  res.render("admindashboard.ejs",{viewuserdata:data});
+                }).catch((err)=>{
+                  res.render("error.ejs");
+                })
                
-            
-//          }else{
-//             res.render("adminlogin.ejs",{msg:"invalid username and password"});
-//          }
-//       }else{
-//          res.render("adminlogin.ejs",{msg:"invalid username and password"});
-//       }
-//     }).catch((err)=>{
-//          res.render("error.ejs");
-//     });
-// });
-exports.validadmin = (req, res) => {
-    let { username, password, adminkey } = req.body;
-    let validadminn = adminmodel.validadmindata(username, password);
-
-    validadminn.then((validad) => {
-        if (validad.length > 0) {
-            let role = validad[0].role;
-
-            if ((adminkey === process.env.adminkey) && role === 'admin') {
-                let viewuse = adminmodel.viewalluser();
-                let totalMovies = adminmodel.allmovies();
-
-                Promise.all([viewuse, totalMovies])
-                    .then(([userData, movieData]) => {
-                        res.render("admindashboard.ejs", {
-                            viewuserdata: userData,
-                            totalMovies: movieData[0]['count(*)'] // Extract count from result
-                        });
-                    })
-                    .catch((err) => {
-                        res.render("error.ejs");
-                    });
-
-            } else {
-                res.render("adminlogin.ejs", { msg: "Invalid username or password" });
-            }
-        } else {
-            res.render("adminlogin.ejs", { msg: "Invalid username or password" });
-        }
-    }).catch((err) => {
-        res.render("error.ejs");
+         }else{
+            res.render("adminlogin.ejs",{msg:"invalid username and password"});
+         }
+      }else{
+         res.render("adminlogin.ejs",{msg:"invalid username and password"});
+      }
+    }).catch((err)=>{
+         res.render("error.ejs");
     });
-};
-
+});
 
 exports.viewuseradmin = ((req, res) => {
+  if(req.session.isadmin){
   adminmodel.viewalluser()
     .then((data) => {
       res.render("admindashboard.ejs", { viewuserdata: data });
@@ -147,6 +114,7 @@ exports.viewuseradmin = ((req, res) => {
     .catch((err) => {
       res.render("error.ejs");
     });
+    }
 });
 
 exports.deleteadmin=((req,res)=>{
@@ -493,3 +461,11 @@ exports.searchMovies = async (req, res) => {
 exports.home2=((req,res)=>{
   res.render("homeanimation.ejs");
 })
+
+exports.privacypolicy=((req,res)=>{
+ res.render("privacyandpolicy.ejs");
+});
+
+exports.aboutus=((req,res)=>{
+ res.render("aboutus.ejs");
+});

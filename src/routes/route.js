@@ -1,6 +1,9 @@
 let express=require("express");
 let router=express.Router();
+
 let adminctrl=require("../controller/adminctrl.js");
+
+
 router.get("/",adminctrl.adminctrl);
 //user login
 router.get("/user",adminctrl.userlogin);
@@ -16,6 +19,10 @@ router.post("/finaluserupdate",adminctrl.finalupdateuser);
 router.get("/adminlogin",adminctrl.adminlogin);
 router.post("/validadminn",adminctrl.validadmin);
 router.get("/useradminview",adminctrl.viewuseradmin);
+
+
+
+
 
 router.get("/delbyuser",adminctrl.deleteadmin);
 
@@ -58,6 +65,8 @@ router.get("/viewrecommended",adminctrl.viewreco);
 router.get("/smart", adminctrl.smartsearch);
 router.get("/search", adminctrl.searchMovies);
 
+router.get("/privacy",adminctrl.privacypolicy);
+router.get("/about",adminctrl.aboutus);
 
 
 module.exports=router;
