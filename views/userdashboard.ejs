@@ -10,13 +10,29 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
 
   <style>
-    body { overflow-x: hidden; background-color: #f8f9fa; }
-    .sidebar { min-height: 100vh; }
-    .sidebar .nav-link { color: #fff; cursor: pointer; }
-    .sidebar .nav-link.active { background-color: #343a40; border-radius: 0.375rem; }
-    .navbar-brand { color: #fff; }
+    body {
+      overflow-x: hidden;
+      background-color: #f8f9fa;
+    }
 
-    /* Dynamic Content Scroll */
+    .sidebar {
+      min-height: 100vh;
+    }
+
+    .sidebar .nav-link {
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .sidebar .nav-link.active {
+      background-color: #343a40;
+      border-radius: 0.375rem;
+    }
+
+    .navbar-brand {
+      color: #fff;
+    }
+
     .dynamic-content {
       overflow-y: auto;
       max-height: 85vh;
@@ -24,46 +40,86 @@
     }
 
     .content-section {
-      display: none; /* Hide all sections initially */
+      display: none;
     }
 
     .content-section.active {
-      display: block; /* Show only the selected section */
+      display: block;
     }
-     /* ✅ Ensure Consistent Card Sizes */
-   /* ✅ Ensure Consistent Card Sizes */
-  .movie-card {
-    width: 100%;
-    max-width: 300px;
-    height: 450px;
-    margin: auto;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    border-radius: 8px; /* Rounded corners */
-  }
 
-  /* ✅ Maintain Image's Full Size */
-  .movie-card img {
-    width: 100%;
-    height: 250px;
-    object-fit: scale-down; /* ✅ Ensures full image is displayed without cropping */
-    background-color: black; /* ✅ Adds background for smaller images */
-  }
+    .movie-card {
+      width: 100%;
+      max-width: 300px;
+      height: 450px;
+      margin: auto;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      border-radius: 8px;
+    }
 
-  .movie-card .card-body {
-    text-align: center;
-    flex-grow: 1; /* ✅ Keeps spacing consistent */
-  }
-/* Add hover effect to movie cards */
-.movie-card:hover {
-  transform: scale(1.02);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-  transition: transform 0.3s, box-shadow 0.3s;
-}
+    .movie-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: scale-down;
+      background-color: black;
+    }
 
+    .movie-card .card-body {
+      text-align: center;
+      flex-grow: 1;
+    }
+
+    .movie-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    /* 🎨 Decorative Profile Card Styling */
+    .profile-card {
+      background: linear-gradient(to bottom right, #e3f2fd, #ffffff);
+      border: 1px solid #cfd8dc;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      border-radius: 20px;
+      padding: 30px;
+      transition: transform 0.3s ease;
+    }
+
+    .profile-card:hover {
+      transform: scale(1.01);
+    }
+
+    .profile-card .form-label {
+      font-weight: 600;
+      color: #0d47a1;
+    }
+
+    .profile-card .form-control {
+      border-radius: 10px;
+      border: 1px solid #90caf9;
+      background-color: #e3f2fd;
+    }
+
+    .profile-card .form-control:focus {
+      border-color: #1976d2;
+      box-shadow: 0 0 0 0.2rem rgba(25, 118, 210, 0.25);
+    }
+
+    .profile-header {
+      background: #1976d2;
+      color: white;
+      padding: 15px;
+      border-radius: 16px 16px 0 0;
+      text-align: center;
+    }
+
+    .profile-footer {
+      text-align: center;
+      padding-top: 15px;
+    }
   </style>
 </head>
 <body>
@@ -80,23 +136,21 @@
 
   <div class="container-fluid">
     <div class="row">
-      <!-- ✅ Sidebar Navigation (Static) -->
+      <!-- ✅ Sidebar -->
       <nav id="offcanvasSidebar" class="col-md-2 col-lg-2 d-md-block bg-black sidebar offcanvas-md offcanvas-start text-white p-3">
         <h4 class="text-center">👤 Welcome, <%=viewprof[0].username%></h4>
         <hr />
         <ul class="nav flex-column">
           <li class="nav-item"><a href="/" class="nav-link active" data-section="homeSection"><i class="fas fa-home me-2"></i>Home</a></li>
-          <li class="nav-item"><a class="nav-link" data-section="searchSection"><i class="fas fa-search me-2"></i>Search</a></li>
           <li class="nav-item"><a href="/userviewmove" class="nav-link" data-section="moviesSection"><i class="fas fa-video me-2"></i>View Movies</a></li>
           <li class="nav-item"><a class="nav-link" data-section="detailsSection"><i class="fas fa-info-circle me-2"></i>View Profile</a></li>
-          <li class="nav-item"><a class="nav-link" data-section="subscribeSection"><i class="fas fa-bell me-2"></i>Subscribe</a></li>
-          <li class="nav-item"><a href="" class="nav-link" data-section="rateSection"><i class="fas fa-star me-2"></i>Rating</a></li>
+          <li class="nav-item"><a href="/viewrecommended" class="nav-link" data-section="subscribeSection"><i class="fas fa-bell me-2"></i>Recommendation</a></li>
           <li class="nav-item"><a href="/mywatchlist" class="nav-link" data-section="commentSection"><i class="fas fa-comment me-2"></i>My Watchlist</a></li>
           <li class="nav-item"><a class="nav-link" href="/"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
         </ul>
       </nav>
 
-      <!-- ✅ Dynamic Content (Scroll Enabled) -->
+      <!-- ✅ Dynamic Content -->
       <main class="col-md-10 ms-sm-auto col-lg-10 px-md-4 pt-4">
         <div class="dynamic-content">
           <div id="homeSection" class="content-section active">
@@ -109,41 +163,44 @@
             <p>Find your favorite movies here.</p>
           </div>
 
-          <!-- ✅ View Movies Section with Dynamic Card Grid -->
-         <div id="moviesSection" class="content-section">
-           
+          <div id="moviesSection" class="content-section">
             <div class="container">
-             <div class="row" id="moviesContainer">
-           <!-- Movies will load here dynamically -->
-             </div>
+              <div class="row" id="moviesContainer">
+                <!-- Movies will load here dynamically -->
+              </div>
             </div>
-         </div>
+          </div>
 
+          <!-- ✅ User Profile Decorative Card -->
           <div id="detailsSection" class="content-section">
             <div class="container mt-5">
               <div class="row justify-content-center">
                 <div class="col-md-8 col-lg-6">
-                  <div class="card shadow-lg border-0 rounded-4">
-                    <div class="card-header bg-primary text-white text-center rounded-top-4">
+                  <div class="profile-card">
+                    <div class="profile-header">
                       <h3 class="mb-0">👤 User Profile</h3>
                     </div>
-                    <div class="card-body bg-light">
+                    <div class="card-body">
                       <form>
-                        <div class="mb-3"><label class="form-label fw-semibold">Username</label>
+                        <div class="mb-3">
+                          <label class="form-label"><i class="fas fa-user me-2"></i>Username</label>
                           <input type="text" class="form-control" value="<%= viewprof[0].username %>" readonly>
                         </div>
-                        <div class="mb-3"><label class="form-label fw-semibold">Email</label>
+                        <div class="mb-3">
+                          <label class="form-label"><i class="fas fa-envelope me-2"></i>Email</label>
                           <input type="email" class="form-control" value="<%= viewprof[0].email %>" readonly>
                         </div>
-                        <div class="mb-3"><label class="form-label fw-semibold">Contact</label>
+                        <div class="mb-3">
+                          <label class="form-label"><i class="fas fa-phone me-2"></i>Contact</label>
                           <input type="text" class="form-control" value="<%= viewprof[0].contact %>" readonly>
                         </div>
-                        <div class="mb-3"><label class="form-label fw-semibold">City</label>
+                        <div class="mb-3">
+                          <label class="form-label"><i class="fas fa-city me-2"></i>City</label>
                           <input type="text" class="form-control" value="<%= viewprof[0].city %>" readonly>
                         </div>
                       </form>
                     </div>
-                    <div class="card-footer text-center bg-white border-0">
+                    <div class="profile-footer">
                       <a href="/updateuser?userid=<%= viewprof[0].uid %>" class="btn btn-outline-primary px-4">✏️ Edit Profile</a>
                     </div>
                   </div>
@@ -151,6 +208,7 @@
               </div>
             </div>
           </div>
+
         </div>
       </main>
     </div>
@@ -159,21 +217,19 @@
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- ✅ JavaScript for Sidebar Navigation -->
+  <!-- ✅ Section Switch Logic -->
   <script>
-  document.querySelectorAll('.nav-link[data-section]').forEach(link => {
-    link.addEventListener('click', function () {
-      document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-      this.classList.add('active');
+    document.querySelectorAll('.nav-link[data-section]').forEach(link => {
+      link.addEventListener('click', function () {
+        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
 
-      document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active'));
-      const sectionId = this.getAttribute('data-section');
-      document.getElementById(sectionId)?.classList.add('active');
-
+        document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active'));
+        const sectionId = this.getAttribute('data-section');
+        document.getElementById(sectionId)?.classList.add('active');
+      });
     });
-  });
-
-
   </script>
+
 </body>
 </html>

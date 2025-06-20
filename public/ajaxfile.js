@@ -67,6 +67,16 @@ let ajaxfile = (str) => {
                 col.innerHTML = `<a href="${item.movie_url}" target="_blank">Play</a>`;
                 row.appendChild(col);
 
+                col = document.createElement("td");
+                col.innerHTML = `<a href="/deletemovie?mid=<%=item.mid%>" target="_blank">delete</a>`;
+                row.appendChild(col);
+    
+                col = document.createElement("td");
+                col.innerHTML = `<a href="/updatemovie?mid=<%=item.mid%>" target="_blank">update</a>`;
+                row.appendChild(col);
+
+
+
                 tblbody.appendChild(row);
             });
         }

@@ -309,17 +309,19 @@ exports.saverating=((req,res)=>{
   let {uid,mid,rating,review}=req.body;
   let saverate=adminmodel.saverating(uid,mid,rating,review);
       saverate.then((savere)=>{
-        let viewmovierate=adminmodel.ratingmovie();
+        let mid=req.query.mid;
+        let viewmovierate=adminmodel.ratingmovie(mid);
         let uid=req.session.user_id;
         let username=req.session.usernamee;
       viewmovierate.then((viewrate)=>{
           res.render("rateform.ejs",{ratemove:viewrate,uid,username,msg:"rating submit"});
 
       }).catch((err)=>{
-          res.render("rateform.ejs",{ratemove:viewrate,uid,username,msg:"rating not submit"});
+          res.render("rateform.ejs",{ratemove:[],uid,username,msg:"rating not submit"});
+          console.log(err)
       });
       }).catch((err)=>{
-         res.render("rateform.ejs",{ratemove:viewrate,uid,username,msg:"rating not submit"});
+         console.log(err)
      
       });
 
@@ -381,6 +383,23 @@ let viewwatchobj=adminmodel.viewwatchlist(userwatchid);
     });
 
 });
+exports.deletewatchlist=((req,res)=>{
+  let mid=req.query.mid;
+  let useid=req.session.user_id;
+  let delwatch=adminmodel.delewat(mid,useid);
+      delwatch.then((delwa)=>{
+        let userwatchid=req.session.user_id;
+        let viewwatchobj=adminmodel.viewwatchlist(userwatchid);
+      viewwatchobj.then((viewwa)=>{
+     res.render("viewuserwatch.ejs",{viewatch:viewwa});
+    }).catch((err)=>{
+      console.log(err);
+    });
+      }).catch((err)=>{
+        console.log(err)
+      });
+
+});
 
 exports.addrecommend=((req,res)=>{
  let mid=req.query.mid;
@@ -412,7 +431,17 @@ exports.saverecommend=((req,res)=>{
         console.log(err)
         
       });
-})
+});
+
+
+exports.viewreco=((req,res)=>{
+  let viewreco=adminmodel.viewrecommended();
+      viewreco.then((viewre)=>{
+      res.render("viewrecommendedmovie.ejs",{viewreco:viewre});
+      }).catch((err)=>{
+      console.log(err);
+      });
+});
 
 //smart search
 const axios = require("axios");

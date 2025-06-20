@@ -36,10 +36,14 @@
         <h4 class="text-center">🎬 Admin Panel</h4>
         <hr />
         <ul class="nav flex-column">
-          <li class="nav-item"><a class="nav-link" data-section="dashboardSection"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
-          <li class="nav-item"><a class="nav-link active" data-section="moviesSection"><i class="bi bi-film me-2"></i>All Movies</a></li>
-          <li class="nav-item"><a class="nav-link" data-section="reviewsSection"><i class="bi bi-chat-dots me-2"></i>Reviews</a></li>
-          <li class="nav-item"><a class="nav-link" data-section="settingsSection"><i class="bi bi-gear me-2"></i>Settings</a></li>
+          <li class="nav-item"><a href="/" class="nav-link active" data-section="dashboardSection"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
+          
+          <li class="nav-item"><a class="nav-link" data-section="categorySection"  href="/moviee"><i class="bi bi-tags me-2"  ></i>Add Movies</a></li>
+          <li class="nav-item"><a class="nav-link" data-section="moviesSection" href="/viewmovie"><i class="bi bi-film me-2"></i>All Movies</a></li>
+         
+          <li class="nav-item"><a class="nav-link" href="/reviewmovie" data-section="reviewsSection"><i class="bi bi-chat-dots me-2"></i>Reviews</a></li>
+         
+       
         </ul>
       </nav>
 
@@ -93,8 +97,18 @@
                     <td><img src="<%= item.poster_url %>" target="_blank" class="btn btn-sm btn-outline-primary" width="40px" height="60px"></img></td>
                     <td><a href="<%= item.trailer_url %>" target="_blank" class="btn btn-sm btn-outline-success">Watch</a></td>
                     <td><a href="<%= item.movie_url %>" target="_blank" class="btn btn-sm btn-outline-danger">Play</a></td>
-                    <td><a href="/deletemovie?mid=<%=item.mid%>">delete</a></td>
-                    <td><a href="/updatemovie?mid=<%=item.mid%>">update</a></td>
+                     
+                    <td class="text-center">
+                    <a href="/deletemovie?mid=<%= item.mid %>" class="btn btn-sm btn-danger">
+                   <i class="bi bi-trash"></i> Delete
+                   </a>
+                   </td>
+                   <td class="text-center">
+                   <a href="/updatemovie?mid=<%= item.mid %>" class="btn btn-sm btn-warning text-white">
+                   <i class="bi bi-pencil-square"></i> Update
+                   </a>
+                   </td>
+
                   </tr>
               <% }) 
               } else { %>

@@ -47,10 +47,12 @@ router.get("/reviewmovie",adminctrl.reviewmovie);
 router.get("/watchlist",adminctrl.watchlist);
 router.post("/savewatchlist",adminctrl.savewatchlistt);
 router.get("/mywatchlist",adminctrl.viewwatchlist);
+router.get("/deletewatch",adminctrl.deletewatchlist);
 
 //recommendation
 router.get("/recommended",adminctrl.addrecommend);
 router.post("/saverecommend",adminctrl.saverecommend);
+router.get("/viewrecommended",adminctrl.viewreco);
 //search movie
 //Movie Recommendations Route
 router.get("/smart", adminctrl.smartsearch);

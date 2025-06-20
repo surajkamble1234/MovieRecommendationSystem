@@ -254,7 +254,7 @@ exports.savewatch=((...watch)=>{
 
 exports.viewwatchlist=((...wause)=>{
   return new Promise((resolve,reject)=>{
-   conn.query("select m.title,m.poster_url,m.trailer_url,m.movie_url from movies m join watchlist w on m.mid=w.mid join userregister u on w.uid=u.uid where u.uid=?",[...wause],(err,result)=>{
+   conn.query("select m.mid,m.title,m.poster_url,m.trailer_url,m.movie_url from movies m join watchlist w on m.mid=w.mid join userregister u on w.uid=u.uid where u.uid=?",[...wause],(err,result)=>{
     if(err)
     {
       reject(err);
@@ -262,6 +262,18 @@ exports.viewwatchlist=((...wause)=>{
       resolve(result);
     }
    });
+  });
+});
+
+exports.delewat=((...delw)=>{
+  return new Promise((resolve,reject)=>{
+  conn.query("delete from watchlist where mid=? and uid=?",[...delw],(err,result)=>{
+   if(err){
+    reject(err);
+   }else{
+    resolve(result);
+   }
+  });
   });
 });
 
@@ -276,3 +288,16 @@ exports.addrecommend=((...addreco)=>{
  });
  });
 });
+
+exports.viewrecommended=((req,res)=>{
+  return new Promise((resolve,reject)=>{
+  conn.query("select m.title,m.poster_url,m.trailer_url,m.movie_url from ratings r join movies m on r.mid=m.mid join recommendations re on re.mid=m.mid group by r.mid having count(r.rating)>=4 and avg(r.rating)>=4",(err,result)=>{
+  if(err)
+  {
+    reject(err);
+  }else{
+    resolve(result);
+  }
+  }); 
+  });
+})

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Watchlist Form</title>
 
   <!-- Bootstrap 4 CSS -->
@@ -11,21 +11,22 @@
     crossorigin="anonymous">
 
   <style>
-    body {
+    html, body {
+      height: 100%;
       margin: 0;
+      background-color: #f8f9fa;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      height: 100vh;
-      background: linear-gradient(135deg, #74ebd5, #acb6e5);
-      overflow-x: hidden;
     }
 
     .sidebar {
+      width: 250px;
       background-color: #343a40;
-      height: 100vh;
-      padding: 30px 15px;
       color: white;
-      position: fixed;
-      width: 220px;
+      height: 100vh;
+      padding: 20px 15px;
+      position: sticky;
+      top: 0;
+      flex-shrink: 0;
     }
 
     .sidebar h4 {
@@ -37,7 +38,7 @@
     .sidebar a {
       color: #ffffff;
       display: block;
-      padding: 8px 0;
+      padding: 10px 0;
       text-decoration: none;
       font-size: 15px;
     }
@@ -46,16 +47,16 @@
       color: #ffc107;
     }
 
-    .content {
-      margin-left: 240px;
-      padding: 30px;
+    .main-content {
+      padding: 2rem;
+      flex-grow: 1;
     }
 
     .form-container {
       background-color: #ffffff;
       padding: 30px;
       border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
       max-width: 600px;
       margin: auto;
     }
@@ -75,61 +76,55 @@
     .form-check-label {
       font-size: 0.95rem;
     }
-
-    .form-check-label a {
-      color: #007bff;
-      text-decoration: none;
-    }
-
-    .form-check-label a:hover {
-      text-decoration: underline;
-    }
   </style>
 </head>
 
 <body>
+  <div class="d-flex">
+    <!-- Sidebar -->
+     <div class="sidebar d-none d-md-block">
+      <h4 class="text-white mb-3 ps-3">🎬 User Dashboard</h4>
+      <hr style="border-color: #555;" />
+      <ul class="nav flex-column">
+        <li class="nav-item"><a href="/" class="nav-link active"><i class="bi bi-house-door me-2"></i>Home</a></li>
+        <li class="nav-item"><a href="/userviewmove" class="nav-link"><i class="bi bi-film me-2"></i>View Movies</a></li>
+        <li class="nav-item"><a href="/viewrecommended" class="nav-link"><i class="bi bi-star-fill me-2"></i>Recommendation</a></li>
+        <li class="nav-item"><a href="/mywatchlist" class="nav-link"><i class="bi bi-bookmark-check me-2"></i>My Watchlist</a></li>
+        <li class="nav-item"><a href="/" class="nav-link"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+      </ul>
+    </div>
 
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <h4>MovieZone</h4>
-    <a href="/dashboard">Dashboard</a>
-    <a href="/movies">Movies</a>
-    <a href="/rating">Rate a Movie</a>
-    <a href="/watchlist">Watchlist</a>
-    <a href="/logout">Logout</a>
-  </div>
 
-  <!-- Main Content -->
-  <div class="content">
-    <div class="form-container">
-      <h2>Watchlist Form</h2>
-      <form name="frm" action="/savewatchlist" method="post">
+    <!-- Main Content -->
+    <div class="main-content">
+      <div class="form-container">
+        <h2>Watchlist Form</h2>
+        <form name="frm" action="/savewatchlist" method="post">
 
-        <div class="form-group">
-          <label for="uid">Username</label>
-          <select name="uid" id="uid" class="form-control">
-            <option value="<%=id%>"><%=name%></option>
-          </select>
-        </div>
+          <div class="form-group">
+            <label for="uid">Username</label>
+            <select name="uid" id="uid" class="form-control">
+              <option value="<%=id%>"><%=name%></option>
+            </select>
+          </div>
 
-        <div class="form-group">
-          <label for="movie">Movies</label>
-          <select name="mid" id="movie" class="form-control">
-            <% wamove.forEach((item, index) => { %>
-              <option value="<%= item.mid %>"><%= item.title %></option>
-            <% }) %>
-          </select>
-        </div>
+          <div class="form-group">
+            <label for="movie">Movies</label>
+            <select name="mid" id="movie" class="form-control">
+              <% wamove.forEach((item, index) => { %>
+                <option value="<%= item.mid %>"><%= item.title %></option>
+              <% }) %>
+            </select>
+          </div>
 
-        <button type="submit" class="btn btn-primary">Submit Watchlist</button>
+          <button type="submit" class="btn btn-primary">Submit Watchlist</button>
 
-        <div class="form-group mt-3 text-center">
-          <label class="text-success"><%= msg %></label>
-        </div>
-        
-      </form>
+          <div class="form-group mt-3 text-center">
+            <label class="text-success"><%= msg %></label>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
-
 </body>
 </html>
