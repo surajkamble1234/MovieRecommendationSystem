@@ -58,23 +58,28 @@ let ajaxfile = (str) => {
                 col = document.createElement("td");
                 col.innerHTML = `<img src="${item.poster_url}" alt="Poster" width="40" height="60" target="_blank"></=>`;
                 row.appendChild(col);
- 
+                
                 col = document.createElement("td");
-                col.innerHTML = `<a href="${item.trailer_url}" target="_blank">Watch</a>`;
+                col.innerHTML = `<a href="${item.trailer_url}" target="_blank" class="btn btn-sm  btn-outline-success">Watch</a>`;
                 row.appendChild(col);
 
                 col = document.createElement("td");
-                col.innerHTML = `<a href="${item.movie_url}" target="_blank">Play</a>`;
+                col.innerHTML = `<a href="${item.movie_url}" target="_blank" class="btn btn-sm btn-outline-danger">Play</a>`;
                 row.appendChild(col);
 
                 col = document.createElement("td");
-                col.innerHTML = `<a href="/deletemovie?mid=<%=item.mid%>" target="_blank">delete</a>`;
-                row.appendChild(col);
-    
-                col = document.createElement("td");
-                col.innerHTML = `<a href="/updatemovie?mid=<%=item.mid%>" target="_blank">update</a>`;
-                row.appendChild(col);
+                col.className = "text-center";
+                col.innerHTML = `<a href="/deletemovie?mid=${item.mid}" class="btn btn-sm btn-danger">
+                    <i class="bi bi-trash"></i> Delete
+                 </a>`;
+                 row.appendChild(col);
 
+                col = document.createElement("td");
+                col.className = "text-center";
+                col.innerHTML = `<a href="/updatemovie?mid=${item.mid}" class="btn btn-sm btn-warning text-white">
+                    <i class="bi bi-pencil-square"></i> Update
+                 </a>`;
+                row.appendChild(col);
 
 
                 tblbody.appendChild(row);
